@@ -1,0 +1,185 @@
+[
+    {
+        "code": "OK",
+        "data": {
+            "container": {
+                "goods_id": 967941,
+                "icon_url": "https://market.fp.ps.netease.com/file/66fde4d15e36956d6530882bVRKHVCzf05",
+                "name": "画廊武器箱",
+                "sell_min_price": "4.7"
+            },
+            "has_unusual": true,
+            "items": [
+                {
+                    "goods": {
+                        "appid": 730,
+                        "description": null,
+                        "game": "csgo",
+                        "goods_id": 968376,
+                        "icon_url": "https://market.fp.ps.netease.com/file/66fe0af7765582cb9d9fa899Whwjh01605",
+                        "is_charm": false,
+                        "item_id": null,
+                        "keychain_color_img": null,
+                        "market_hash_name": "M4A1-S | Vaporwave (Factory New)",
+                        "market_min_price": "0",
+                        "name": "M4A1 消音型 | 蒸汽波 (崭新出厂)",
+                        "original_icon_url": "https://market.fp.ps.netease.com/file/66fe0af4d69bd87634e6cc17isXJwY6z05",
+                        "sell_min_price": "1538.35",
+                        "sell_reference_price": "0",
+                        "short_name": "M4A1 消音型 | 蒸汽波",
+                        "steam_price": "264",
+                        "steam_price_cny": "1909.84",
+                        "tags": {
+                            "category": {
+                                "category": "category",
+                                "id": 629,
+                                "internal_name": "weapon_m4a1_silencer",
+                                "localized_name": "M4A1 消音版"
+                            },
+                            "category_group": {
+                                "category": "category_group",
+                                "id": 622,
+                                "internal_name": "rifle",
+                                "localized_name": "步枪"
+                            },
+                            "exterior": {
+                                "category": "exterior",
+                                "id": 510,
+                                "internal_name": "wearcategory0",
+                                "localized_name": "崭新出厂"
+                            },
+                            "itemset": {
+                                "category": "itemset",
+                                "id": 19715,
+                                "internal_name": "armory",
+                                "localized_name": "armory"
+                            },
+                            "quality": {
+                                "category": "quality",
+                                "id": 516,
+                                "internal_name": "normal",
+                                "localized_name": "普通"
+                            },
+                            "rarity": {
+                                "category": "rarity",
+                                "id": 588,
+                                "internal_name": "ancient_weapon",
+                                "localized_name": "隐秘"
+                            },
+                            "type": {
+                                "category": "type",
+                                "id": 570,
+                                "internal_name": "csgo_type_rifle",
+                                "localized_name": "步枪"
+                            },
+                            "weapon": {
+                                "category": "weapon",
+                                "id": 533,
+                                "internal_name": "weapon_m4a1_silencer",
+                                "localized_name": "M4A1 消音版"
+                            },
+                            "weaponcase": {
+                                "category": "weaponcase",
+                                "id": 19714,
+                                "internal_name": "Gallery Case",
+                                "localized_name": "gallery case"
+                            }
+                        }
+                    },
+                    "goods_id": 968376,
+                    "localized_name": "M4A1 消音型 | 蒸汽波",
+                    "max_price": "1538.35",
+                    "min_price": "669"
+                },
+                {
+                    "goods": {
+                        "appid": 730,
+                        "description": null,
+                        "game": "csgo",
+                        "goods_id": 968377,
+                        "icon_url": "https://market.fp.ps.netease.com/file/66fe2b019ff9c7dee9de0d45AA0Yprws05",
+                        "is_charm": false,
+                        "item_id": null,
+                        "keychain_color_img": null,
+                        "market_hash_name": "Glock-18 | Gold Toof (Factory New)",
+                        "market_min_price": "0",
+                        "name": "格洛克 18 型 | 大金牙 (崭新出厂)",
+                        "original_icon_url": "https://market.fp.ps.netease.com/file/66fe2afef518dbf73c79a733E8uhtNOK05",
+                        "sell_min_price": "510",
+                        "sell_reference_price": "0",
+                        "short_name": "格洛克 18 型 | 大金牙",
+                        "steam_price": "95.49",
+                        "steam_price_cny": "690.8",
+                        "tags": {
+                            "category": {
+                                "category": "category",
+                                "id": 614,
+                                "internal_name": "weapon_glock",
+                                "localized_name": "格洛克 18 型"
+                            },
+                            "category_group": {
+                                "category": "category_group",
+                                "id": 611,
+                                "internal_name": "pistol",
+                                "localized_name": "手枪"
+                            },
+                            "custom": {
+                                "category": "custom",
+                                "id": 11596,
+                                "internal_name": "purple",
+                                "localized_name": "purple"
+                            },
+                            "exterior": {
+                                "category": "exterior",
+                                "id": 510,
+                                "internal_name": "wearcategory0",
+                                "localized_name": "崭新出厂"
+                            },
+                            "itemset": {
+                                "category": "itemset",
+                                "id": 19715,
+                                "internal_name": "armory",
+                                "localized_name": "armory"
+                            },
+                            "quality": {
+                                "category": "quality",
+                                "id": 516,
+                                "internal_name": "normal",
+                                "localized_name": "普通"
+                            },
+                            "rarity": {
+                                "category": "rarity",
+                                "id": 588,
+                                "internal_name": "ancient_weapon",
+                                "localized_name": "隐秘"
+                            },
+                            "type": {
+                                "category": "type",
+                                "id": 576,
+                                "internal_name": "csgo_type_pistol",
+                                "localized_name": "手枪"
+                            },
+                            "weapon": {
+                                "category": "weapon",
+                                "id": 531,
+                                "internal_name": "weapon_glock",
+                                "localized_name": "格洛克 18 型"
+                            },
+                            "weaponcase": {
+                                "category": "weaponcase",
+                                "id": 19714,
+                                "internal_name": "Gallery Case",
+                                "localized_name": "gallery case"
+                            }
+                        }
+                    },
+                    "goods_id": 968377,
+                    "localized_name": "格洛克 18 型 | 大金牙",
+                    "max_price": "510",
+                    "min_price": "103"
+                }
+            ]
+        },
+        "msg": null
+    }
+]

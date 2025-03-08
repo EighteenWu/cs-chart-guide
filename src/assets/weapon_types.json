@@ -1,0 +1,34 @@
+{
+    "types": [
+        {
+            "id": "pistol",
+            "name": "手枪",
+            "internal_name": "csgo_type_pistol"
+        },
+        {
+            "id": "smg",
+            "name": "微型冲锋枪",
+            "internal_name": "csgo_type_smg"
+        },
+        {
+            "id": "rifle",
+            "name": "步枪",
+            "internal_name": "csgo_type_rifle"
+        },
+        {
+            "id": "shotgun",
+            "name": "霰弹枪",
+            "internal_name": "csgo_type_shotgun"
+        },
+        {
+            "id": "machinegun",
+            "name": "机枪",
+            "internal_name": "csgo_type_machinegun"
+        },
+        {
+            "id": "sniperrifle",
+            "name": "狙击步枪",
+            "internal_name": "csgo_type_sniperrifle"
+        }
+    ]
+}

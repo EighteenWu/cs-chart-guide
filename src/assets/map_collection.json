@@ -1,0 +1,324 @@
+{
+    "code": "OK",
+    "data": {
+        "items": [
+            {
+                "container_type": "itemset",
+                "description": "The Sport & Field Collection",
+                "icon_url": "https://market.fp.ps.netease.com/file/66fe33133ace19c8235e77257ZkOfKFr05",
+                "name": "狩猎运动收藏品",
+                "new": true,
+                "value": "set_realism_camo"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Graphic Design Collection",
+                "icon_url": "https://market.fp.ps.netease.com/file/66fe35ad14fa0b75b292759eEJ49I29S05",
+                "name": "平面设计收藏品",
+                "new": true,
+                "value": "set_graphic_design"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Overpass 2024 Collection",
+                "icon_url": "https://market.fp.ps.netease.com/file/66fe33f832ccd1f496eff885wW3rmvK405",
+                "name": "死亡游乐园2024收藏品",
+                "new": true,
+                "value": "set_overpass_2024"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Anubis Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/6448ddca2b1fce9e2d3cce26m2WcS6Yq04",
+                "name": "阿努比斯收藏品",
+                "new": false,
+                "value": "set_anubis"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The 2021 Vertigo Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/614afd0f7c3c4d7688910335ltghlTXt03",
+                "name": "2021 殒命大厦收藏品",
+                "new": false,
+                "value": "set_vertigo_2021"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The 2021 Mirage Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/614afd007c3c4d6e3035e980ZtmgW0NN03",
+                "name": "2021 荒漠迷城收藏品",
+                "new": false,
+                "value": "set_mirage_2021"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The 2021 Dust 2 Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/614afccf7c3c4d0cca81dfebvETZvoZ203",
+                "name": "2021 炙热沙城 II 收藏品",
+                "new": false,
+                "value": "set_dust_2_2021"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The 2021 Train Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/614afcf17c3c4d6496037220e8HSjz1J03",
+                "name": "2021 列车停放站收藏品",
+                "new": false,
+                "value": "set_train_2021"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Ancient Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5fc9ee7a7f9d2a7c2395e04ezlmllSxL02",
+                "name": "远古收藏品",
+                "new": false,
+                "value": "set_op10_ancient"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Control Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5fc9ee6202c9a17146115dbf9vBXqF9q02",
+                "name": "控制收藏品",
+                "new": false,
+                "value": "set_op10_ct"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Havoc Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5fc9ee476f049437e4a2a94c2ETKAfXx02",
+                "name": "浩劫收藏品",
+                "new": false,
+                "value": "set_op10_t"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Norse Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9031a896dee4b2ed6b542eHeiAzlI002",
+                "name": "挪威人收藏品",
+                "new": false,
+                "value": "set_norse"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Canals Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e90313996dee4a2f0c273farkavLqay02",
+                "name": "运河水城收藏品",
+                "new": false,
+                "value": "set_canals"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The St. Marc Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9030c62786fd609cb3a509uh7R5c1z02",
+                "name": "圣马克镇收藏品",
+                "new": false,
+                "value": "set_stmarc"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The 2018 Inferno Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e90325c6f0494ed6c5cd631bX66HEij02",
+                "name": "2018 炼狱小镇收藏品",
+                "new": false,
+                "value": "set_inferno_2"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The 2018 Nuke Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9032385e60273cb47d2d0bhW9f7Ggi02",
+                "name": "2018 核子危机收藏品",
+                "new": false,
+                "value": "set_nuke_2"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Gods and Monsters Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9034b87f9d2a9d62bfabe4BU0kMxtK02",
+                "name": "神魔收藏品",
+                "new": false,
+                "value": "set_gods_and_monsters"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Chop Shop Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e90331a5e6027f2f3133299cIocjSfL02",
+                "name": "解体厂收藏品",
+                "new": false,
+                "value": "set_chopshop"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Rising Sun Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e903679143cfae32378c429NivtRiBg02",
+                "name": "旭日收藏品",
+                "new": false,
+                "value": "set_kimono"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Cache Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9034835e60272e469f659aDHa20Wjf02",
+                "name": "死城之谜收藏品",
+                "new": false,
+                "value": "set_cache"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Overpass Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9033d52786fd609cb3a906LCKFLT7T02",
+                "name": "死亡游乐园收藏品",
+                "new": false,
+                "value": "set_overpass"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Cobblestone Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9034302786fd609cb3a953Iv5FqGAt02",
+                "name": "古堡激战收藏品",
+                "new": false,
+                "value": "set_cobblestone"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Baggage Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e90379396dee4be2144f099oXeiZg9a02",
+                "name": "行李仓库收藏品",
+                "new": false,
+                "value": "set_baggage"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Bank Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9036a77f9d2a8ed9399a9aopmIhrjY02",
+                "name": "金库危机收藏品",
+                "new": false,
+                "value": "set_bank"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Dust 2 Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9035eb6f04946c9172511aCi8RSlmw02",
+                "name": "炙热沙城 II 收藏品",
+                "new": false,
+                "value": "set_dust_2"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Train Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e90338e2786fd609cb3a8cbxagI9kQv02",
+                "name": "列车停放站收藏品",
+                "new": false,
+                "value": "set_train"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Mirage Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e90355a5e602733dfd52252Im9TMJ4702",
+                "name": "荒漠迷城收藏品",
+                "new": false,
+                "value": "set_mirage"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Italy Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9034ce5e602702bfc58da2wEjWhgsc02",
+                "name": "意大利小镇收藏品",
+                "new": false,
+                "value": "set_italy"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Lake Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e903456143cfa28f9456a300qo8jMqz02",
+                "name": "湖畔激战收藏品",
+                "new": false,
+                "value": "set_lake"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Safehouse Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9034ed96dee46a0cb43e0bRN0gO1Eo02",
+                "name": "安全处所收藏品",
+                "new": false,
+                "value": "set_safehouse"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Alpha Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9035c38b742751e4ee308eo8tkGLYZ02",
+                "name": "无畏收藏品",
+                "new": false,
+                "value": "set_bravo_ii"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Dust Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e90361d2786fd17c0a8ef6eJOaH1KtP02",
+                "name": "炙热沙城收藏品",
+                "new": false,
+                "value": "set_dust"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Aztec Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e90363f2786fda5641ae185QfcE3yoC02",
+                "name": "雨林遗迹收藏品",
+                "new": false,
+                "value": "set_aztec"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Vertigo Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9036c0143cfa0a6fa8512b9R7YGkdP02",
+                "name": "殒命大厦收藏品",
+                "new": false,
+                "value": "set_vertigo"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Inferno Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9033476f0494e1ac605ae6YlUNoHUS02",
+                "name": "炼狱小镇收藏品",
+                "new": false,
+                "value": "set_inferno"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Militia Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e903293143cfacf701279fd80qsFicD02",
+                "name": "佣兵训练营收藏品",
+                "new": false,
+                "value": "set_militia"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Nuke Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9033b1a7f2524f95039b9awfUgGUaK02",
+                "name": "核子危机收藏品",
+                "new": false,
+                "value": "set_nuke"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Office Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e9032d896dee4a2f0c277076HYKAzlJ02",
+                "name": "办公室收藏品",
+                "new": false,
+                "value": "set_office"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Assault Collection",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e90349c8b74274d17162298Y0u3OSzA02",
+                "name": "仓库突击收藏品",
+                "new": false,
+                "value": "set_assault"
+            }
+        ],
+        "page_num": 1,
+        "page_size": 60,
+        "total_count": 39,
+        "total_page": 1
+    },
+    "msg": null
+}

@@ -1,0 +1,307 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.filter-container {
+    background-color: #2a2a2a;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+/* 加载状态容器 */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.weapon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.weapon-card {
+    background-color: #2a2a2a;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.weapon-card:hover {
+    transform: translateY(-5px);
+}
+
+.weapon-image {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    background-color: #3a3a3a;
+    padding: 10px;
+}
+
+.weapon-info {
+    padding: 12px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.weapon-name {
+    font-weight: bold;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+}
+
+.weapon-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.weapon-type {
+    color: #999;
+    font-size: 12px;
+}
+
+.weapon-exterior {
+    font-size: 10px;
+    padding: 0 4px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.weapon-container {
+    color: #999;
+    font-size: 12px;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.weapon-price {
+    margin-top: auto;
+    border-top: 1px solid #3a3a3a;
+    padding-top: 8px;
+}
+
+.price-tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price-label {
+    color: #999;
+    font-size: 12px;
+}
+
+.price-value {
+    color: #ff4d4f;
+    font-weight: bold;
+}
+
+/* 稀有度颜色 */
+.rarity-covert {
+    color: #eb4b4b;
+}
+
+.rarity-classified {
+    color: #d32ce6;
+}
+
+.rarity-restricted {
+    color: #8847ff;
+}
+
+.rarity-milspec {
+    color: #4b69ff;
+}
+
+.rarity-industrial {
+    color: #5e98d9;
+}
+
+.rarity-consumer {
+    color: #b0c3d9;
+}
+
+/* 分页样式 */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+}
+
+/* 详情模态框样式 */
+.weapon-detail-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3a3a3a;
+    border-radius: 4px;
+    padding: 20px;
+    height: 100%;
+    min-height: 300px;
+}
+
+.weapon-detail-image {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+/* 覆盖 Ant Design 默认样式 */
+.ant-modal-content {
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+.ant-modal-header {
+    background-color: #2a2a2a;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.ant-modal-title {
+    color: #fff;
+}
+
+.ant-modal-close {
+    color: #999;
+}
+
+.ant-modal-close:hover {
+    color: #fff;
+}
+
+.ant-table {
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+.ant-table-thead>tr>th {
+    background-color: #3a3a3a;
+    color: #fff;
+    border-bottom: 1px solid #444;
+}
+
+.ant-table-tbody>tr>td {
+    border-bottom: 1px solid #444;
+}
+
+.ant-table-tbody>tr:hover>td {
+    background-color: #3a3a3a;
+}
+
+.ant-divider {
+    background-color: #444;
+}
+
+.ant-pagination-item a {
+    color: #fff;
+}
+
+.ant-pagination-item-active {
+    background-color: #1890ff;
+    border-color: #1890ff;
+}
+
+.ant-pagination-item-active a {
+    color: #fff;
+}
+
+.ant-select-dropdown {
+    background-color: #2a2a2a;
+}
+
+.ant-select-item {
+    color: #fff;
+}
+
+.ant-select-item-option-selected {
+    background-color: #1890ff;
+}
+
+.ant-select-item-option-active {
+    background-color: #3a3a3a;
+}
+
+/* 警告和错误提示样式 */
+.ant-alert {
+    border-radius: 4px;
+}
+
+.ant-alert-error {
+    background-color: rgba(255, 77, 79, 0.1);
+    border-color: #ff4d4f;
+}
+
+.ant-alert-warning {
+    background-color: rgba(250, 173, 20, 0.1);
+    border-color: #faad14;
+}
+
+.ant-alert-message {
+    color: #fff;
+}
+
+.ant-alert-description {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* 加载中样式 */
+.ant-spin {
+    color: #1890ff;
+}
+
+.ant-spin-text {
+    color: #fff;
+}

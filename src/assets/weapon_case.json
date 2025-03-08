@@ -1,0 +1,340 @@
+{
+    "code": "OK",
+    "data": {
+        "items": [
+            {
+                "container_type": "weaponcase",
+                "description": "Gallery Case",
+                "icon_url": "https://market.fp.ps.netease.com/file/66fde4d15e36956d6530882bVRKHVCzf05",
+                "name": "画廊武器箱",
+                "new": true,
+                "value": "Gallery Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Kilowatt Case",
+                "icon_url": "https://market.fp.ps.netease.com/file/65c2d1e641a6a6bbcafdd84cscGrKHvL05",
+                "name": "千瓦武器箱",
+                "new": false,
+                "value": "Kilowatt Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Revolution Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/63e5a2e6779f248773656374kAHJNEoE04",
+                "name": "变革武器箱",
+                "new": false,
+                "value": "Revolution Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Recoil Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/62bf6ac991df682427d38ac4MbtVXRUV04",
+                "name": "反冲武器箱",
+                "new": false,
+                "value": "Recoil Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Dreams & Nightmares Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/61ea007291df686b72795522ILtdbSRG04",
+                "name": "梦魇武器箱",
+                "new": false,
+                "value": "Dreams & Nightmares Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Operation Riptide Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/614a91013769865a87e7a1624uO88TLL03",
+                "name": "“激流大行动”武器箱",
+                "new": false,
+                "value": "Operation Riptide Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Snakebite Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/609079ca2786fd5a983c694dj6KXbAdk03",
+                "name": "蛇噬武器箱",
+                "new": false,
+                "value": "Snakebite Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Operation Broken Fang Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5fc966f269b21a7918b0d6c43gKJgTbu02",
+                "name": "“狂牙大行动”武器箱",
+                "new": false,
+                "value": "Operation Broken Fang Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Fracture Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5f2cadd07f9d2ad2f7231f44KiHkXa5a02",
+                "name": "裂空武器箱",
+                "new": false,
+                "value": "Fracture Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Prisma 2 Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5e83d7916f04943b53820821TwZ0RJVV02",
+                "name": "棱彩2号武器箱",
+                "new": false,
+                "value": "Prisma 2 Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Shattered Web Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5dd32b5f8b74275eb3ba076fWkz9S0Zz02",
+                "name": "“裂网大行动”武器箱",
+                "new": false,
+                "value": "Shattered Web Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "CS20 Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5daa16cf143cfa4bec985411BxRRRYe402",
+                "name": "反恐精英20周年武器箱",
+                "new": false,
+                "value": "CS20 Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Prisma Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5c899fe8a7f25296f3b01ab5PiKsXDdV02",
+                "name": "棱彩武器箱",
+                "new": false,
+                "value": "Prisma Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Danger Zone Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/62c3b160c664ed63dbc9fe422iC3gh0e04",
+                "name": "“头号特训”武器箱",
+                "new": false,
+                "value": "Danger Zone Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Horizon Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5ba0c7bb8b7427acadc44b8bmHbkFe9b",
+                "name": "地平线武器箱",
+                "new": false,
+                "value": "Horizon Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Clutch Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fe246fb758acf3db7dc6fzK9qCbh3",
+                "name": "命悬一线武器箱",
+                "new": false,
+                "value": "Clutch Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Spectrum 2 Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5aa02c57fb758a6794d5f8d0MtQFYjk0",
+                "name": "光谱 2 号武器箱",
+                "new": false,
+                "value": "Spectrum 2 Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Operation Hydra Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5aa0920746072bfb7e8a50b7zBQ22Cbd",
+                "name": "“九头蛇大行动”武器箱",
+                "new": false,
+                "value": "Operation Hydra Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Spectrum Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5aa02c5502c9a1460d3cad93UyMigZ7S",
+                "name": "光谱武器箱",
+                "new": false,
+                "value": "Spectrum Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Glove Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fd0d8aa49f1fe03de25dczLmPe5KQ",
+                "name": "手套武器箱",
+                "new": false,
+                "value": "Glove Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Gamma 2 Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5aa02c96adce5f1d91fe27be00S1ADiu",
+                "name": "伽玛 2 号武器箱",
+                "new": false,
+                "value": "Gamma 2 Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Gamma Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5aa02c8569b21a88c3aefa0brqoaujxU",
+                "name": "伽玛武器箱",
+                "new": false,
+                "value": "Gamma Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Chroma 3 Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fd45169b21ae4e2268192XHxJ5hrs",
+                "name": "幻彩 3 号武器箱",
+                "new": false,
+                "value": "Chroma 3 Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Operation Wildfire Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5aa0312fadce5f1d91fe28677s3owPgu",
+                "name": "“野火大行动”武器箱",
+                "new": false,
+                "value": "Operation Wildfire Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Revolver Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fd4548b742772910c7584OGRgc5qB",
+                "name": "左轮武器箱",
+                "new": false,
+                "value": "Revolver Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Shadow Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fc99c46072b7813edaf54EmqUrt07",
+                "name": "暗影武器箱",
+                "new": false,
+                "value": "Shadow Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Falchion Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fd42246072b96180140cbCwi7lZLd",
+                "name": "弯曲猎手武器箱",
+                "new": false,
+                "value": "Falchion Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Chroma 2 Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fd45302c9a18f3c9eca349z1RAAZ9",
+                "name": "幻彩 2 号武器箱",
+                "new": false,
+                "value": "Chroma 2 Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Chroma Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fd44f6f0494db8b736a20wr58RkEJ",
+                "name": "幻彩武器箱",
+                "new": false,
+                "value": "Chroma Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Operation Vanguard Weapon Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5aa091f4a750143a006e1db0fxKpbupo",
+                "name": "“先锋大行动”武器箱",
+                "new": false,
+                "value": "Operation Vanguard Weapon Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "eSports 2014 Summer Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fc37da75014218b2c8fe21Fur6XOQ",
+                "name": "电竞 2014 夏季武器箱",
+                "new": false,
+                "value": "eSports 2014 Summer Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Operation Breakout Weapon Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5aa091c920e3db096ff6843cVzDYC6Hj",
+                "name": "“突围大行动”武器箱",
+                "new": false,
+                "value": "Operation Breakout Weapon Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Huntsman Weapon Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fc382a7501417d3ce21c3ASKiPiAg",
+                "name": "猎杀者武器箱",
+                "new": false,
+                "value": "Huntsman Weapon Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Operation Phoenix Weapon Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5aa091d6fb758a3a65815c57o5LufSFm",
+                "name": "“凤凰大行动”武器箱",
+                "new": false,
+                "value": "Operation Phoenix Weapon Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "eSports 2013 Winter Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fc37f5e602779217e53708Oecwcv7",
+                "name": "电竞 2013 冬季武器箱",
+                "new": false,
+                "value": "eSports 2013 Winter Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Winter Offensive Weapon Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5aa02b367f9d2a70995c3681e7iQVvRE",
+                "name": "冬季攻势武器箱",
+                "new": false,
+                "value": "Winter Offensive Weapon Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "CS:GO Weapon Case 3",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fe29aadce5f7c6be1a523kvRBHBj4",
+                "name": "反恐精英 3 号武器箱",
+                "new": false,
+                "value": "CS:GO Weapon Case 3"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "Operation Bravo Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5aa091c8a75014c6bfd9cf89tSoTzLEN",
+                "name": "“英勇大行动”武器箱",
+                "new": false,
+                "value": "Operation Bravo Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "eSports 2013 Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fc37e96dee43e1cc6ad9aUqKhWz56",
+                "name": "电竞 2013 武器箱",
+                "new": false,
+                "value": "eSports 2013 Case"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "CS:GO Weapon Case 2",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fe29b20e3db896fccfd1cCmLsBWv4",
+                "name": "反恐精英 2 号武器箱",
+                "new": false,
+                "value": "CS:GO Weapon Case 2"
+            },
+            {
+                "container_type": "weaponcase",
+                "description": "CS:GO Weapon Case",
+                "icon_url": "https://g.fp.ps.netease.com/market/file/5a9fe276a75014727f7d829a0mprmKKb",
+                "name": "反恐精英武器箱",
+                "new": false,
+                "value": "CS:GO Weapon Case"
+            }
+        ],
+        "page_num": 1,
+        "page_size": 60,
+        "total_count": 41,
+        "total_page": 1
+    },
+    "msg": null
+}
