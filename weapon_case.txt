@@ -1,0 +1,8 @@
+武器箱收藏品url:https://buff.163.com/api/market/csgo_container_list/v2?type=weapon_cases&page_num=1&page_size=60&type2=weapon_case_collection
+
+武器箱明细收藏品url：https://buff.163.com/api/market/csgo_container?container=Kilowatt%20Case&is_container=1&container_type=weaponcase&unusual_only=0&game=csgo&appid=730
+
+地图收藏品url:https://buff.163.com/api/market/csgo_container_list/v2?type=map_collections&page_num=1&page_size=60
+
+
+地图收藏品明细:https://buff.163.com/api/market/csgo_container?container=set_dust&is_container=1&container_type=itemset&unusual_only=0&game=csgo&appid=730
