@@ -31,7 +31,13 @@ export const extractWeaponCaseItems = (weaponCaseDetails) => {
                             weapon_type: goods.tags.category_group ? goods.tags.category_group.localized_name : '',
                             weapon_name: goods.tags.weapon ? goods.tags.weapon.localized_name : '',
                             container: containerName,
-                            container_internal_name: goods.tags.weaponcase ? goods.tags.weaponcase.internal_name : ''
+                            container_internal_name: goods.tags.weaponcase ? goods.tags.weaponcase.internal_name : '',
+                            // 添加汰换所需的字段
+                            rarity: goods.tags.rarity || null,
+                            quality: goods.tags.quality || null,
+                            weaponcase: goods.tags.weaponcase || null,
+                            exterior: goods.tags.exterior || null,
+                            is_souvenir: goods.tags.quality && goods.tags.quality.internal_name === 'tournament'
                         });
                     }
                 });
@@ -78,7 +84,13 @@ export const extractMapCollectionItems = (mapCollectionDetails) => {
                             weapon_type: goods.tags.category_group ? goods.tags.category_group.localized_name : '',
                             weapon_name: goods.tags.weapon ? goods.tags.weapon.localized_name : '',
                             container: containerName,
-                            container_internal_name: goods.tags.itemset ? goods.tags.itemset.internal_name : ''
+                            container_internal_name: goods.tags.itemset ? goods.tags.itemset.internal_name : '',
+                            // 添加汰换所需的字段
+                            rarity: goods.tags.rarity || null,
+                            quality: goods.tags.quality || null,
+                            weaponcase: goods.tags.itemset || null, // 对于地图收藏品，使用itemset作为weaponcase
+                            exterior: goods.tags.exterior || null,
+                            is_souvenir: goods.tags.quality && goods.tags.quality.internal_name === 'tournament'
                         });
                     }
                 });
@@ -101,13 +113,31 @@ export const getRarityColor = (rarityInternalName) => {
     const rarityColors = {
         'ancient_weapon': '#eb4b4b',    // 隐秘
         'legendary_weapon': '#d32ce6',  // 保密
-        'mythical_weapon': '#8847ff',   // 分类
+        'mythical_weapon': '#8847ff',   // 受限级
         'rare_weapon': '#4b69ff',       // 军规级
         'uncommon_weapon': '#5e98d9',   // 工业级
         'common_weapon': '#b0c3d9'      // 消费级
     };
 
     return rarityColors[rarityInternalName] || '#b0c3d9';
+};
+
+/**
+ * 根据稀有度内部名称获取对应的中文名称
+ * @param {string} rarityInternalName 稀有度内部名称
+ * @returns {string} 中文名称
+ */
+export const getRarityName = (rarityInternalName) => {
+    const rarityNames = {
+        'ancient_weapon': '隐秘级',
+        'legendary_weapon': '保密级',
+        'mythical_weapon': '受限级',
+        'rare_weapon': '军规级',
+        'uncommon_weapon': '工业级',
+        'common_weapon': '消费级'
+    };
+
+    return rarityNames[rarityInternalName] || '未知';
 };
 
 /**
@@ -134,4 +164,45 @@ export const getMapCollectionNames = (mapCollectionData) => {
     }
 
     return mapCollectionData.data.items.map(item => item.name);
+};
+
+/**
+ * 检查物品是否为收藏品系列中的最高品质
+ * @param {Object} item 物品对象
+ * @param {Array} allItems 所有物品数组
+ * @returns {boolean} 是否为最高品质
+ */
+export const isHighestRarityInCollection = (item, allItems) => {
+    if (!item || !item.weaponcase || !item.rarity || !item.rarity.internal_name) {
+        return false;
+    }
+
+    const collectionName = item.weaponcase.internal_name;
+    const itemRarity = item.rarity.internal_name;
+
+    // 查找同一收藏品系列中的所有物品
+    const sameCollectionItems = allItems.filter(
+        i => i.weaponcase && i.weaponcase.internal_name === collectionName
+    );
+
+    // 获取该系列中的最高稀有度
+    const rarityLevels = {
+        'common_weapon': 1,
+        'uncommon_weapon': 2,
+        'rare_weapon': 3,
+        'mythical_weapon': 4,
+        'legendary_weapon': 5,
+        'ancient_weapon': 6
+    };
+
+    const currentRarityLevel = rarityLevels[itemRarity] || 0;
+
+    // 检查是否有更高稀有度的物品
+    const hasHigherRarity = sameCollectionItems.some(i => {
+        if (!i.rarity || !i.rarity.internal_name) return false;
+        const otherRarityLevel = rarityLevels[i.rarity.internal_name] || 0;
+        return otherRarityLevel > currentRarityLevel;
+    });
+
+    return !hasHigherRarity;
 }; 

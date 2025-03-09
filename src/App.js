@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Layout, Pagination, Alert, Spin, ConfigProvider, theme, Switch, Space, Row, Col } from 'antd';
-import { BulbOutlined, BulbFilled } from '@ant-design/icons';
+import { Layout, Pagination, Alert, Spin, ConfigProvider, theme, Switch, Space, Row, Col, Menu } from 'antd';
+import { BulbOutlined, BulbFilled, AppstoreOutlined, SyncOutlined } from '@ant-design/icons';
 import FilterPanel from './components/FilterPanel';
 import WeaponList from './components/WeaponList';
+import TradeUpSimulator from './components/TradeUpSimulator';
 import weaponCaseData from './assets/weapon_case.json';
 import mapCollectionData from './assets/map_collection.json';
 import weaponTypes from './assets/weapon_types.json';
@@ -35,6 +36,7 @@ function App() {
     const [selectedContainer, setSelectedContainer] = useState([]);
     const [selectedWeaponType, setSelectedWeaponType] = useState(null);
     const [selectedWeaponName, setSelectedWeaponName] = useState(null);
+    const [selectedRarity, setSelectedRarity] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredItems, setFilteredItems] = useState([]);
 
@@ -50,6 +52,9 @@ function App() {
 
     // 添加暗黑模式状态
     const [darkMode, setDarkMode] = useState(false);
+
+    // 添加当前活动页面状态
+    const [activePage, setActivePage] = useState('browse'); // 'browse' 或 'tradeup'
 
     // 网站运行时间
     const [runningTime, setRunningTime] = useState(calculateRunningTime());
@@ -108,45 +113,63 @@ function App() {
         }
     }, []);
 
-    // 提取所有武器名称及其类型
-    const weaponNames = useMemo(() => {
+    // 获取所有容器名称
+    const getContainers = () => {
+        const weaponCases = weaponCaseData.data.items.map(item => ({
+            id: item.value,
+            name: item.name,
+            type: 'weapon_case'
+        }));
+
+        const mapCollections = mapCollectionData.data.items.map(item => ({
+            id: item.value,
+            name: item.name,
+            type: 'map_collection'
+        }));
+
+        return [...weaponCases, ...mapCollections];
+    };
+
+    // 获取所有武器名称
+    const getWeaponNames = () => {
+        // 合并所有物品数据
         const allItems = [...weaponCaseItems, ...mapCollectionItems];
-        const weaponNameSet = new Set();
-        const result = [];
+
+        // 提取不同的武器类型和名称
+        const uniqueWeapons = [];
+        const weaponSet = new Set();
 
         allItems.forEach(item => {
-            if (item.weapon_name && item.weapon_type) {
-                const key = `${item.weapon_name}_${item.weapon_type}`;
-                if (!weaponNameSet.has(key)) {
-                    weaponNameSet.add(key);
-                    result.push({
-                        name: item.weapon_name,
-                        type: item.weapon_type
-                    });
-                }
+            const weaponType = item.weapon_type;
+            const weaponName = item.weapon_name;
+
+            if (weaponType && weaponName && !weaponSet.has(weaponName)) {
+                weaponSet.add(weaponName);
+                uniqueWeapons.push({
+                    type: weaponType,
+                    name: weaponName
+                });
             }
         });
 
-        return result;
-    }, [weaponCaseItems, mapCollectionItems]);
-
-    // 获取容器列表
-    const getContainers = () => {
-        if (containerType === 'weapon_case') {
-            return weaponCaseData.data.items;
-        } else if (containerType === 'map_collection') {
-            return mapCollectionData.data.items;
-        } else {
-            return [];
-        }
+        return uniqueWeapons;
     };
 
-    // 处理主题模式切换
+    // 处理主题切换
     const handleThemeChange = (checked) => {
         setDarkMode(checked);
     };
 
-    // 筛选武器
+    // 配置主题
+    const themeConfig = {
+        algorithm: darkMode ? darkAlgorithm : defaultAlgorithm,
+        token: {
+            colorPrimary: '#1890ff',
+            borderRadius: 4,
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+        },
+    };
+
     useEffect(() => {
         // 如果没有选择容器类型，显示所有数据
         let items = [];
@@ -181,6 +204,22 @@ function App() {
             console.log(`按武器名称筛选后数量: ${items.length}`);
         }
 
+        // 按皮肤品质筛选
+        if (selectedRarity) {
+            items = items.filter(item => {
+                if (!item.rarity || !item.rarity.localized_name) return false;
+
+                // 处理品质名称的变化
+                let rarityName = item.rarity.localized_name;
+                if (rarityName === '受限级') rarityName = '受限';
+                if (rarityName === '保密级') rarityName = '保密';
+                if (rarityName === '隐秘级') rarityName = '隐秘';
+
+                return rarityName === selectedRarity;
+            });
+            console.log(`按皮肤品质筛选后数量: ${items.length}`);
+        }
+
         // 按搜索关键词筛选
         if (searchQuery) {
             const query = searchQuery.toLowerCase();
@@ -202,6 +241,7 @@ function App() {
         selectedContainer,
         selectedWeaponType,
         selectedWeaponName,
+        selectedRarity,
         searchQuery,
         weaponCaseItems,
         mapCollectionItems
@@ -222,15 +262,31 @@ function App() {
         }
     };
 
-    // 配置主题
-    const themeConfig = {
-        algorithm: darkMode ? darkAlgorithm : defaultAlgorithm,
-        token: {
-            colorPrimary: '#1890ff',
-            borderRadius: 4,
-            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-        },
+    // 处理导航菜单点击
+    const handleMenuClick = (e) => {
+        setActivePage(e.key);
     };
+
+    // 创建筛选面板组件
+    const filterPanelComponent = (
+        <FilterPanel
+            containerType={containerType}
+            setContainerType={setContainerType}
+            containers={getContainers()}
+            selectedContainer={selectedContainer}
+            setSelectedContainer={setSelectedContainer}
+            weaponTypes={weaponTypes.types}
+            selectedWeaponType={selectedWeaponType}
+            setSelectedWeaponType={setSelectedWeaponType}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            weaponNames={getWeaponNames()}
+            selectedWeaponName={selectedWeaponName}
+            setSelectedWeaponName={setSelectedWeaponName}
+            selectedRarity={selectedRarity}
+            setSelectedRarity={setSelectedRarity}
+        />
+    );
 
     return (
         <ConfigProvider theme={themeConfig}>
@@ -238,7 +294,22 @@ function App() {
                 <Header className="app-header">
                     <Row justify="space-between" align="middle">
                         <Col>
-                            <div className="title">CS汰换模拟器</div>
+                            <div className="title">CS工具箱</div>
+                        </Col>
+                        <Col flex="auto">
+                            <Menu
+                                mode="horizontal"
+                                selectedKeys={[activePage]}
+                                onClick={handleMenuClick}
+                                style={{ background: 'transparent', borderBottom: 'none' }}
+                            >
+                                <Menu.Item key="browse" icon={<AppstoreOutlined />}>
+                                    浏览皮肤
+                                </Menu.Item>
+                                <Menu.Item key="tradeup" icon={<SyncOutlined />}>
+                                    汰换模拟
+                                </Menu.Item>
+                            </Menu>
                         </Col>
                         <Col>
                             <Space>
@@ -265,45 +336,42 @@ function App() {
                             />
                         )}
 
-                        <FilterPanel
-                            containerType={containerType}
-                            setContainerType={setContainerType}
-                            containers={getContainers()}
-                            selectedContainer={selectedContainer}
-                            setSelectedContainer={setSelectedContainer}
-                            weaponTypes={weaponTypes.types}
-                            selectedWeaponType={selectedWeaponType}
-                            setSelectedWeaponType={setSelectedWeaponType}
-                            searchQuery={searchQuery}
-                            setSearchQuery={setSearchQuery}
-                            weaponNames={weaponNames}
-                            selectedWeaponName={selectedWeaponName}
-                            setSelectedWeaponName={setSelectedWeaponName}
-                        />
-
-                        {loading ? (
-                            <div className="loading-container">
-                                <Spin size="large" tip="加载数据中..." />
-                            </div>
-                        ) : (
+                        {activePage === 'browse' ? (
                             <>
-                                <WeaponList items={paginatedItems} />
+                                {filterPanelComponent}
 
-                                {/* 添加分页组件 */}
-                                {totalItems > 0 && (
-                                    <div className="pagination-container">
-                                        <Pagination
-                                            current={currentPage}
-                                            pageSize={pageSize}
-                                            total={totalItems}
-                                            onChange={handlePageChange}
-                                            showSizeChanger
-                                            showTotal={(total) => `共 ${total} 个物品`}
-                                            pageSizeOptions={[10, 20, 50, 100]}
-                                        />
+                                {loading ? (
+                                    <div className="loading-container">
+                                        <Spin size="large" tip="加载数据中..." />
                                     </div>
+                                ) : (
+                                    <>
+                                        <WeaponList items={paginatedItems} />
+
+                                        {/* 添加分页组件 */}
+                                        {totalItems > 0 && (
+                                            <div className="pagination-container">
+                                                <Pagination
+                                                    current={currentPage}
+                                                    pageSize={pageSize}
+                                                    total={totalItems}
+                                                    onChange={handlePageChange}
+                                                    showSizeChanger
+                                                    showTotal={(total) => `共 ${total} 个物品`}
+                                                    pageSizeOptions={[10, 20, 50, 100]}
+                                                />
+                                            </div>
+                                        )}
+                                    </>
                                 )}
                             </>
+                        ) : (
+                            <TradeUpSimulator
+                                weaponCaseItems={weaponCaseItems}
+                                mapCollectionItems={mapCollectionItems}
+                                filterPanel={filterPanelComponent}
+                                filteredItems={filteredItems}
+                            />
                         )}
                     </div>
                 </Content>

@@ -339,3 +339,272 @@ code {
 .dark-theme .ant-spin-text {
     color: #fff;
 }
+
+/* 汰换模拟器样式 */
+.trade-up-simulator {
+    margin-bottom: 20px;
+}
+
+.light-theme .trade-up-simulator .ant-card {
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .trade-up-simulator .ant-card {
+    background-color: #2a2a2a;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.trade-up-simulator .ant-card-head {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dark-theme .trade-up-simulator .ant-card-head {
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.trade-up-simulator .ant-card-head-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.trade-up-simulator .ant-divider {
+    margin: 16px 0;
+}
+
+.trade-up-simulator .ant-select-item-option-content span {
+    font-weight: bold;
+}
+
+.trade-up-simulator .ant-empty {
+    margin: 32px 0;
+}
+
+.trade-up-simulator .ant-card-small {
+    transition: transform 0.3s;
+}
+
+.trade-up-simulator .ant-card-small:hover {
+    transform: translateY(-5px);
+}
+
+.trade-up-simulator .ant-tag {
+    margin-bottom: 4px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .trade-up-simulator .ant-col-4 {
+        flex: 0 0 33.33%;
+        max-width: 33.33%;
+    }
+}
+
+@media (max-width: 576px) {
+    .trade-up-simulator .ant-col-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* 武器卡片样式 */
+.weapon-card {
+    transition: transform 0.3s;
+    margin-bottom: 16px;
+}
+
+.weapon-card:hover {
+    transform: translateY(-5px);
+}
+
+.weapon-image-container {
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    height: 150px;
+}
+
+.dark-theme .weapon-image-container {
+    background-color: #2a2a2a;
+}
+
+.weapon-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.weapon-info {
+    padding: 8px 0;
+}
+
+.weapon-name {
+    font-weight: bold;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.weapon-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.weapon-container {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.dark-theme .weapon-container {
+    color: #aaa;
+}
+
+.weapon-price {
+    font-size: 14px;
+}
+
+.price-tag {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-label {
+    color: #666;
+}
+
+.dark-theme .price-label {
+    color: #aaa;
+}
+
+.price-value {
+    font-weight: bold;
+    color: #f5222d;
+}
+
+.dark-theme .price-value {
+    color: #ff7875;
+}
+
+/* 磨损条样式 */
+.wear-bar-container {
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.wear-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-color);
+}
+
+/* 筛选条件区域 */
+.filter-conditions {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+/* 汰换模拟器布局 */
+.trade-up-simulator {
+    padding: 16px;
+}
+
+/* 武器卡片样式优化 */
+.weapon-card {
+    transition: all 0.3s;
+    margin-bottom: 8px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.weapon-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.weapon-image-container {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--card-background);
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+}
+
+.weapon-image {
+    max-height: 120px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.weapon-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.weapon-name {
+    font-weight: bold;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.weapon-details {
+    margin-bottom: 8px;
+}
+
+.weapon-container {
+    font-size: 12px;
+    color: var(--secondary-text-color);
+    margin-bottom: 8px;
+}
+
+.weapon-probability {
+    margin-top: 8px;
+}
+
+/* 亮色主题 */
+:root {
+    --background-color: #f0f2f5;
+    --card-background: #ffffff;
+    --text-color: #000000;
+    --secondary-text-color: #666666;
+    --border-color: #e8e8e8;
+    --hover-color: #f5f5f5;
+    --primary-color: #1890ff;
+    --success-color: #52c41a;
+    --warning-color: #faad14;
+    --error-color: #f5222d;
+}
+
+/* 暗色主题 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #141414;
+        --card-background: #1f1f1f;
+        --text-color: #ffffff;
+        --secondary-text-color: #a6a6a6;
+        --border-color: #303030;
+        --hover-color: #262626;
+        --primary-color: #177ddc;
+        --success-color: #49aa19;
+        --warning-color: #d89614;
+        --error-color: #a61d24;
+    }
+}

@@ -28,8 +28,4 @@ yarn-error.log*
 .vscode/
 
 # Vercel
-.vercel
-
-# Cache
-.cache
-node_modules/.cache/ 
+.vercel 

@@ -4,6 +4,26 @@ import { SearchOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
+// 品质等级映射
+const RARITY_LEVELS = {
+    '消费级': 1,
+    '工业级': 2,
+    '军规级': 3,
+    '受限': 4,
+    '保密': 5,
+    '隐秘': 6
+};
+
+// 品质颜色映射
+const RARITY_COLORS = {
+    '消费级': '#b0c3d9',
+    '工业级': '#5e98d9',
+    '军规级': '#4b69ff',
+    '受限': '#8847ff',
+    '保密': '#d32ce6',
+    '隐秘': '#eb4b4b'
+};
+
 const FilterPanel = ({
     containerType,
     setContainerType,
@@ -17,7 +37,9 @@ const FilterPanel = ({
     setSearchQuery,
     weaponNames,
     selectedWeaponName,
-    setSelectedWeaponName
+    setSelectedWeaponName,
+    selectedRarity,
+    setSelectedRarity
 }) => {
     // 本地状态，用于存储按武器类型筛选的武器名称列表
     const [filteredWeaponNames, setFilteredWeaponNames] = useState([]);
@@ -44,6 +66,11 @@ const FilterPanel = ({
         setSelectedWeaponName(value);
     };
 
+    // 处理品质变更
+    const handleRarityChange = (value) => {
+        setSelectedRarity(value);
+    };
+
     // 处理搜索查询变更
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
@@ -54,6 +81,7 @@ const FilterPanel = ({
         setSelectedContainer([]);
         setSelectedWeaponType(null);
         setSelectedWeaponName(null);
+        setSelectedRarity(null);
         setSearchQuery('');
     };
 
@@ -77,6 +105,15 @@ const FilterPanel = ({
             { value: 'weapon_case', label: '武器箱' },
             { value: 'map_collection', label: '地图收藏品' }
         ];
+    };
+
+    // 获取品质选项
+    const getRarityOptions = () => {
+        return Object.entries(RARITY_LEVELS).map(([name, level]) => ({
+            value: name,
+            label: name,
+            color: RARITY_COLORS[name]
+        }));
     };
 
     // 当武器类型变化时，筛选对应的武器名称
@@ -171,6 +208,23 @@ const FilterPanel = ({
                             {filteredWeaponNames.map(weapon => (
                                 <Option key={weapon.name} value={weapon.name}>
                                     {weapon.name}
+                                </Option>
+                            ))}
+                        </Select>
+                    </Col>
+
+                    <Col xs={24} sm={12} md={6} lg={6}>
+                        <div style={{ marginBottom: 8 }}>皮肤品质</div>
+                        <Select
+                            placeholder="请选择皮肤品质"
+                            style={{ width: '100%' }}
+                            value={selectedRarity}
+                            onChange={handleRarityChange}
+                            allowClear
+                        >
+                            {getRarityOptions().map(option => (
+                                <Option key={option.value} value={option.value}>
+                                    <span style={{ color: option.color }}>{option.label}</span>
                                 </Option>
                             ))}
                         </Select>
