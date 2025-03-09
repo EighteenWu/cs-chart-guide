@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Layout, Pagination, Alert, Spin } from 'antd';
+import { Layout, Pagination, Alert, Spin, ConfigProvider, theme, Switch, Space, Row, Col } from 'antd';
+import { BulbOutlined, BulbFilled } from '@ant-design/icons';
 import FilterPanel from './components/FilterPanel';
 import WeaponList from './components/WeaponList';
 import weaponCaseData from './assets/weapon_case.json';
@@ -14,12 +15,26 @@ import {
 import weaponCaseDetailsData from './assets/weapon_case_details.json';
 import mapCollectionDetailsData from './assets/map_collection_details.json';
 
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
+const { defaultAlgorithm, darkAlgorithm } = theme;
+
+// 计算网站运行时间
+const calculateRunningTime = () => {
+    const startDate = new Date('2025-03-07'); // 设置网站开始运行的日期
+    const currentDate = new Date();
+    const timeDiff = currentDate - startDate;
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const years = Math.floor(days / 365);
+    const remainingDays = days % 365;
+
+    return `${years}年${remainingDays}天`;
+};
 
 function App() {
-    const [containerType, setContainerType] = useState('weapon_case');
-    const [selectedContainer, setSelectedContainer] = useState(null);
+    const [containerType, setContainerType] = useState('');
+    const [selectedContainer, setSelectedContainer] = useState([]);
     const [selectedWeaponType, setSelectedWeaponType] = useState(null);
+    const [selectedWeaponName, setSelectedWeaponName] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredItems, setFilteredItems] = useState([]);
 
@@ -32,6 +47,21 @@ function App() {
     // 添加数据加载状态
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    // 添加暗黑模式状态
+    const [darkMode, setDarkMode] = useState(false);
+
+    // 网站运行时间
+    const [runningTime, setRunningTime] = useState(calculateRunningTime());
+
+    // 定期更新运行时间
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setRunningTime(calculateRunningTime());
+        }, 1000 * 60 * 60); // 每小时更新一次
+
+        return () => clearInterval(timer);
+    }, []);
 
     // 使用 useMemo 缓存处理后的数据，避免重复计算
     const weaponCaseItems = useMemo(() => {
@@ -78,25 +108,60 @@ function App() {
         }
     }, []);
 
+    // 提取所有武器名称及其类型
+    const weaponNames = useMemo(() => {
+        const allItems = [...weaponCaseItems, ...mapCollectionItems];
+        const weaponNameSet = new Set();
+        const result = [];
+
+        allItems.forEach(item => {
+            if (item.weapon_name && item.weapon_type) {
+                const key = `${item.weapon_name}_${item.weapon_type}`;
+                if (!weaponNameSet.has(key)) {
+                    weaponNameSet.add(key);
+                    result.push({
+                        name: item.weapon_name,
+                        type: item.weapon_type
+                    });
+                }
+            }
+        });
+
+        return result;
+    }, [weaponCaseItems, mapCollectionItems]);
+
     // 获取容器列表
     const getContainers = () => {
         if (containerType === 'weapon_case') {
             return weaponCaseData.data.items;
-        } else {
+        } else if (containerType === 'map_collection') {
             return mapCollectionData.data.items;
+        } else {
+            return [];
         }
+    };
+
+    // 处理主题模式切换
+    const handleThemeChange = (checked) => {
+        setDarkMode(checked);
     };
 
     // 筛选武器
     useEffect(() => {
-        // 根据容器类型选择数据源
-        let items = containerType === 'weapon_case' ? weaponCaseItems : mapCollectionItems;
+        // 如果没有选择容器类型，显示所有数据
+        let items = [];
+        if (!containerType) {
+            items = [...weaponCaseItems, ...mapCollectionItems];
+        } else {
+            // 根据容器类型选择数据源
+            items = containerType === 'weapon_case' ? weaponCaseItems : mapCollectionItems;
+        }
 
-        console.log(`当前数据源: ${containerType}, 数据项数量: ${items.length}`);
+        console.log(`当前数据源数量: ${items.length}`);
 
-        // 按容器筛选
-        if (selectedContainer) {
-            items = items.filter(item => item.container === selectedContainer);
+        // 按容器筛选（多选）
+        if (selectedContainer && selectedContainer.length > 0) {
+            items = items.filter(item => selectedContainer.includes(item.container));
             console.log(`按容器筛选后数量: ${items.length}`);
         }
 
@@ -106,6 +171,14 @@ function App() {
                 item.weapon_type && item.weapon_type === selectedWeaponType
             );
             console.log(`按武器类型筛选后数量: ${items.length}`);
+        }
+
+        // 按武器名称筛选
+        if (selectedWeaponName) {
+            items = items.filter(item =>
+                item.weapon_name && item.weapon_name === selectedWeaponName
+            );
+            console.log(`按武器名称筛选后数量: ${items.length}`);
         }
 
         // 按搜索关键词筛选
@@ -128,6 +201,7 @@ function App() {
         containerType,
         selectedContainer,
         selectedWeaponType,
+        selectedWeaponName,
         searchQuery,
         weaponCaseItems,
         mapCollectionItems
@@ -148,63 +222,99 @@ function App() {
         }
     };
 
+    // 配置主题
+    const themeConfig = {
+        algorithm: darkMode ? darkAlgorithm : defaultAlgorithm,
+        token: {
+            colorPrimary: '#1890ff',
+            borderRadius: 4,
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+        },
+    };
+
     return (
-        <Layout style={{ minHeight: '100vh' }}>
-            <Header style={{ background: '#1f1f1f', padding: '0 20px' }}>
-                <div className="title">CS汰换模拟器</div>
-            </Header>
-            <Content style={{ padding: '20px' }}>
-                <div className="container">
-                    {error && (
-                        <Alert
-                            message="数据加载错误"
-                            description={error}
-                            type="error"
-                            showIcon
-                            style={{ marginBottom: '20px' }}
+        <ConfigProvider theme={themeConfig}>
+            <Layout className={darkMode ? 'dark-theme' : 'light-theme'} style={{ minHeight: '100vh' }}>
+                <Header className="app-header">
+                    <Row justify="space-between" align="middle">
+                        <Col>
+                            <div className="title">CS汰换模拟器</div>
+                        </Col>
+                        <Col>
+                            <Space>
+                                <span>主题模式</span>
+                                <Switch
+                                    checked={darkMode}
+                                    onChange={handleThemeChange}
+                                    checkedChildren={<BulbFilled />}
+                                    unCheckedChildren={<BulbOutlined />}
+                                />
+                            </Space>
+                        </Col>
+                    </Row>
+                </Header>
+                <Content style={{ padding: '20px' }}>
+                    <div className="container">
+                        {error && (
+                            <Alert
+                                message="数据加载错误"
+                                description={error}
+                                type="error"
+                                showIcon
+                                style={{ marginBottom: '20px' }}
+                            />
+                        )}
+
+                        <FilterPanel
+                            containerType={containerType}
+                            setContainerType={setContainerType}
+                            containers={getContainers()}
+                            selectedContainer={selectedContainer}
+                            setSelectedContainer={setSelectedContainer}
+                            weaponTypes={weaponTypes.types}
+                            selectedWeaponType={selectedWeaponType}
+                            setSelectedWeaponType={setSelectedWeaponType}
+                            searchQuery={searchQuery}
+                            setSearchQuery={setSearchQuery}
+                            weaponNames={weaponNames}
+                            selectedWeaponName={selectedWeaponName}
+                            setSelectedWeaponName={setSelectedWeaponName}
                         />
-                    )}
 
-                    <FilterPanel
-                        containerType={containerType}
-                        setContainerType={setContainerType}
-                        containers={getContainers()}
-                        selectedContainer={selectedContainer}
-                        setSelectedContainer={setSelectedContainer}
-                        weaponTypes={weaponTypes.types}
-                        selectedWeaponType={selectedWeaponType}
-                        setSelectedWeaponType={setSelectedWeaponType}
-                        searchQuery={searchQuery}
-                        setSearchQuery={setSearchQuery}
-                    />
+                        {loading ? (
+                            <div className="loading-container">
+                                <Spin size="large" tip="加载数据中..." />
+                            </div>
+                        ) : (
+                            <>
+                                <WeaponList items={paginatedItems} />
 
-                    {loading ? (
-                        <div className="loading-container">
-                            <Spin size="large" tip="加载数据中..." />
-                        </div>
-                    ) : (
-                        <>
-                            <WeaponList items={paginatedItems} />
-
-                            {/* 添加分页组件 */}
-                            {totalItems > 0 && (
-                                <div className="pagination-container">
-                                    <Pagination
-                                        current={currentPage}
-                                        pageSize={pageSize}
-                                        total={totalItems}
-                                        onChange={handlePageChange}
-                                        showSizeChanger
-                                        showTotal={(total) => `共 ${total} 个物品`}
-                                        pageSizeOptions={[10, 20, 50, 100]}
-                                    />
-                                </div>
-                            )}
-                        </>
-                    )}
-                </div>
-            </Content>
-        </Layout>
+                                {/* 添加分页组件 */}
+                                {totalItems > 0 && (
+                                    <div className="pagination-container">
+                                        <Pagination
+                                            current={currentPage}
+                                            pageSize={pageSize}
+                                            total={totalItems}
+                                            onChange={handlePageChange}
+                                            showSizeChanger
+                                            showTotal={(total) => `共 ${total} 个物品`}
+                                            pageSizeOptions={[10, 20, 50, 100]}
+                                        />
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </div>
+                </Content>
+                <Footer className="app-footer">
+                    <div className="footer-content">
+                        <div>cs-alchemize.dkon.cn | design by Cursor</div>
+                        <div>网站已运行 {runningTime}</div>
+                    </div>
+                </Footer>
+            </Layout>
+        </ConfigProvider>
     );
 }
 
