@@ -128,46 +128,56 @@ const FilterPanel = ({
         setFilteredWeaponNames(filtered);
     }, [selectedWeaponType, weaponNames]);
 
+    // 渲染容器类型选择器
+    const renderContainerTypeSelector = () => {
+        return (
+            <Select
+                placeholder="选择收藏品类型"
+                style={{ width: '100%' }}
+                value={containerType}
+                onChange={handleContainerTypeChange}
+                allowClear
+            >
+                <Option value="">全部</Option>
+                <Option value="weapon_case">武器箱</Option>
+                <Option value="map_collection">地图收藏品</Option>
+            </Select>
+        );
+    };
+
+    // 渲染容器选择器
+    const renderContainerSelector = () => {
+        return (
+            <Select
+                mode="multiple"
+                placeholder="选择具体收藏品"
+                style={{ width: '100%' }}
+                value={selectedContainer}
+                onChange={setSelectedContainer}
+                allowClear
+                maxTagCount={3}
+            >
+                {containers.map(container => (
+                    <Option key={container} value={container}>
+                        {container}
+                    </Option>
+                ))}
+            </Select>
+        );
+    };
+
     return (
         <Card className="filter-container">
             <Space direction="vertical" size="middle" style={{ width: '100%' }}>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} sm={12} md={6} lg={6}>
                         <div style={{ marginBottom: 8 }}>收藏品类型</div>
-                        <Select
-                            placeholder="请选择收藏品类型"
-                            style={{ width: '100%' }}
-                            value={containerType}
-                            onChange={handleContainerTypeChange}
-                            allowClear
-                        >
-                            {getContainerTypeOptions().map(option => (
-                                <Option key={option.value} value={option.value}>
-                                    {option.label}
-                                </Option>
-                            ))}
-                        </Select>
+                        {renderContainerTypeSelector()}
                     </Col>
 
                     <Col xs={24} sm={24} md={12} lg={12}>
                         <div style={{ marginBottom: 8 }}>选择{containerType === 'weapon_case' ? '武器箱' : containerType === 'map_collection' ? '地图收藏品' : '收藏品'}</div>
-                        <Select
-                            placeholder={`请选择${containerType === 'weapon_case' ? '武器箱' : containerType === 'map_collection' ? '地图收藏品' : '收藏品'}`}
-                            style={{ width: '100%' }}
-                            value={selectedContainer}
-                            onChange={handleContainerChange}
-                            allowClear
-                            mode="multiple"
-                            maxTagCount={3}
-                            maxTagTextLength={10}
-                            disabled={!containerType}
-                        >
-                            {containers.map(container => (
-                                <Option key={container.name} value={container.name}>
-                                    {container.name}
-                                </Option>
-                            ))}
-                        </Select>
+                        {renderContainerSelector()}
                     </Col>
 
                     <Col xs={24} sm={12} md={6} lg={6} style={{ display: 'flex', alignItems: 'flex-end' }}>

@@ -40,6 +40,15 @@ function App() {
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredItems, setFilteredItems] = useState([]);
 
+    // 添加筛选条件状态
+    const [filters, setFilters] = useState({
+        collectionType: [], // 收藏品类型：武器箱或地图收藏品
+        collections: [],    // 具体的收藏品
+        weaponTypes: [],    // 武器类型
+        rarities: [],       // 皮肤品质
+        exteriors: []       // 外观
+    });
+
     // 添加分页相关状态
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(20);
@@ -113,21 +122,25 @@ function App() {
         }
     }, []);
 
-    // 获取所有容器名称
+    // 获取容器列表
     const getContainers = () => {
-        const weaponCases = weaponCaseData.data.items.map(item => ({
-            id: item.value,
-            name: item.name,
-            type: 'weapon_case'
-        }));
-
-        const mapCollections = mapCollectionData.data.items.map(item => ({
-            id: item.value,
-            name: item.name,
-            type: 'map_collection'
-        }));
-
-        return [...weaponCases, ...mapCollections];
+        // 根据当前选择的容器类型返回不同的容器列表
+        if (containerType === 'weapon_case') {
+            // 返回武器箱列表
+            return [...new Set(weaponCaseItems.map(item => item.container))].filter(Boolean).sort();
+        } else if (containerType === 'map_collection') {
+            // 返回地图收藏品列表
+            return [...new Set(mapCollectionItems.map(item => item.container))].filter(Boolean).sort();
+        } else {
+            // 返回所有容器列表
+            const allContainers = [
+                ...new Set([
+                    ...weaponCaseItems.map(item => item.container),
+                    ...mapCollectionItems.map(item => item.container)
+                ])
+            ].filter(Boolean).sort();
+            return allContainers;
+        }
     };
 
     // 获取所有武器名称
@@ -170,6 +183,100 @@ function App() {
         },
     };
 
+    // 修改 handleFilterChange 函数
+    const handleFilterChange = (filterType, value) => {
+        // 更新筛选条件
+        if (filterType === 'containerType') {
+            setContainerType(value);
+        } else if (filterType === 'container') {
+            setSelectedContainer(value);
+        } else if (filterType === 'weaponType') {
+            setSelectedWeaponType(value);
+        } else if (filterType === 'weaponName') {
+            setSelectedWeaponName(value);
+        } else if (filterType === 'rarity') {
+            setSelectedRarity(value);
+        } else if (filterType === 'search') {
+            setSearchQuery(value);
+        } else {
+            // 更新新的筛选条件
+            setFilters(prev => ({
+                ...prev,
+                [filterType]: value
+            }));
+        }
+
+        // 重置页码
+        setCurrentPage(1);
+    };
+
+    // 修改筛选逻辑
+    const filterItems = (items) => {
+        if (!items) return [];
+
+        return items.filter(item => {
+            // 检查物品是否有必要的属性
+            if (!item || !item.name) return false;
+
+            // 根据容器类型筛选
+            if (containerType === 'weapon_case' && (!item.container || !item.container.includes('武器箱'))) {
+                return false;
+            }
+            if (containerType === 'map_collection' && (!item.container || item.container.includes('武器箱'))) {
+                return false;
+            }
+
+            // 按容器筛选（多选）
+            if (selectedContainer && selectedContainer.length > 0) {
+                if (!item.container || !selectedContainer.includes(item.container)) {
+                    return false;
+                }
+            }
+
+            // 按武器类型筛选
+            if (selectedWeaponType) {
+                if (!item.weapon_type || item.weapon_type !== selectedWeaponType) {
+                    return false;
+                }
+            }
+
+            // 按武器名称筛选
+            if (selectedWeaponName) {
+                if (!item.weapon_name || item.weapon_name !== selectedWeaponName) {
+                    return false;
+                }
+            }
+
+            // 按皮肤品质筛选
+            if (selectedRarity) {
+                if (!item.rarity || !item.rarity.localized_name) return false;
+
+                // 处理品质名称的变化
+                let rarityName = item.rarity.localized_name;
+                if (rarityName === '受限级') rarityName = '受限';
+                if (rarityName === '保密级') rarityName = '保密';
+                if (rarityName === '隐秘级') rarityName = '隐秘';
+
+                if (rarityName !== selectedRarity) {
+                    return false;
+                }
+            }
+
+            // 按搜索关键词筛选
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                if (!(
+                    (item.name && item.name.toLowerCase().includes(query)) ||
+                    (item.weapon_name && item.weapon_name.toLowerCase().includes(query))
+                )) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+    };
+
     useEffect(() => {
         // 如果没有选择容器类型，显示所有数据
         let items = [];
@@ -180,55 +287,8 @@ function App() {
             items = containerType === 'weapon_case' ? weaponCaseItems : mapCollectionItems;
         }
 
-        console.log(`当前数据源数量: ${items.length}`);
-
-        // 按容器筛选（多选）
-        if (selectedContainer && selectedContainer.length > 0) {
-            items = items.filter(item => selectedContainer.includes(item.container));
-            console.log(`按容器筛选后数量: ${items.length}`);
-        }
-
-        // 按武器类型筛选
-        if (selectedWeaponType) {
-            items = items.filter(item =>
-                item.weapon_type && item.weapon_type === selectedWeaponType
-            );
-            console.log(`按武器类型筛选后数量: ${items.length}`);
-        }
-
-        // 按武器名称筛选
-        if (selectedWeaponName) {
-            items = items.filter(item =>
-                item.weapon_name && item.weapon_name === selectedWeaponName
-            );
-            console.log(`按武器名称筛选后数量: ${items.length}`);
-        }
-
-        // 按皮肤品质筛选
-        if (selectedRarity) {
-            items = items.filter(item => {
-                if (!item.rarity || !item.rarity.localized_name) return false;
-
-                // 处理品质名称的变化
-                let rarityName = item.rarity.localized_name;
-                if (rarityName === '受限级') rarityName = '受限';
-                if (rarityName === '保密级') rarityName = '保密';
-                if (rarityName === '隐秘级') rarityName = '隐秘';
-
-                return rarityName === selectedRarity;
-            });
-            console.log(`按皮肤品质筛选后数量: ${items.length}`);
-        }
-
-        // 按搜索关键词筛选
-        if (searchQuery) {
-            const query = searchQuery.toLowerCase();
-            items = items.filter(item =>
-                (item.name && item.name.toLowerCase().includes(query)) ||
-                (item.weapon_name && item.weapon_name.toLowerCase().includes(query))
-            );
-            console.log(`按搜索关键词筛选后数量: ${items.length}`);
-        }
+        // 应用筛选逻辑
+        items = filterItems(items);
 
         // 更新总数量和筛选后的项目
         setTotalItems(items.length);
@@ -244,7 +304,8 @@ function App() {
         selectedRarity,
         searchQuery,
         weaponCaseItems,
-        mapCollectionItems
+        mapCollectionItems,
+        filters
     ]);
 
     // 处理分页

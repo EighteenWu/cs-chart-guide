@@ -88,6 +88,17 @@ const formatPrice = (price) => {
     }
 };
 
+// 添加辅助函数
+const getExteriorName = (exterior) => {
+    if (!exterior) return '';
+    return typeof exterior === 'string' ? exterior : exterior.localized_name || '';
+};
+
+const getTypeName = (type) => {
+    if (!type) return '';
+    return typeof type === 'string' ? type : type.localized_name || '';
+};
+
 const WeaponList = ({ items }) => {
     if (!items || items.length === 0) {
         return (
@@ -121,28 +132,21 @@ const WeaponList = ({ items }) => {
                         </Tooltip>
 
                         <div className="weapon-details">
-                            {item.rarity && (
-                                <Tooltip title={item.rarity.localized_name}>
-                                    <Tag
-                                        className={getRarityClass(item.rarity)}
-                                        color={RARITY_COLORS[item.rarity.localized_name] || item.rarity.color}
-                                    >
-                                        {getStandardRarityName(item.rarity.localized_name)}
-                                    </Tag>
-                                </Tooltip>
-                            )}
-                            {item.weapon_type && (
-                                <Tooltip title={getWeaponTypeName(item.weapon_type)}>
-                                    <Tag className="weapon-type">{getWeaponTypeName(item.weapon_type)}</Tag>
-                                </Tooltip>
-                            )}
-                            {item.exterior && (
-                                <Tag className="weapon-exterior">{item.exterior.localized_name}</Tag>
-                            )}
+                            <Tooltip title={item.rarity.localized_name}>
+                                <Tag
+                                    className="weapon-rarity"
+                                    color={RARITY_COLORS[item.rarity.localized_name] || item.rarity.color}
+                                >
+                                    {getStandardRarityName(item.rarity.localized_name)}
+                                </Tag>
+                            </Tooltip>
+                            <Tag className="weapon-type">
+                                {item.weapon_name || getTypeName(item.type) || '未知武器'}
+                            </Tag>
                         </div>
 
                         <div className="weapon-container">
-                            {item.container || '未知容器'}
+                            {item.container || (item.weaponcase && (typeof item.weaponcase === 'string' ? item.weaponcase : item.weaponcase.localized_name)) || '未知收藏品'}
                         </div>
 
                         <div className="weapon-price">

@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Button, Select, Typography, Divider, message, Empty, Tag, Alert, InputNumber, Badge, Pagination, Tooltip, Progress, Spin } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import { Card, Button, Row, Col, message, Tag, Empty, Pagination, InputNumber, Spin, Divider, Progress } from 'antd';
 import { isHighestRarityInCollection } from '../utils/dataUtils';
 
-const { Text, Paragraph } = Typography;
-const { Option } = Select;
-
-// 品质等级映射
+// 定义品质等级
 const RARITY_LEVELS = {
     '消费级': 1,
     '工业级': 2,
     '军规级': 3,
     '受限级': 4,
     '保密级': 5,
-    '隐秘级': 6,
+    '隐秘级': 6,  // 隐秘级是最高品质，不能参与汰换
     '传说级': 7
 };
 
-// 反向映射，用于显示
+// 定义品质名称
 const RARITY_NAMES = {
     1: '消费级',
     2: '工业级',
@@ -33,22 +29,16 @@ const RARITY_COLORS = {
     '消费级': '#b0c3d9',
     '工业级': '#5e98d9',
     '军规级': '#4b69ff',
+    '受限': '#8847ff',
     '受限级': '#8847ff',
+    '保密': '#d32ce6',
     '保密级': '#d32ce6',
+    '隐秘': '#eb4b4b',
     '隐秘级': '#eb4b4b',
     '传说级': '#e4ae39'
 };
 
-// 磨损度范围
-const WEAR_RANGES = {
-    'fn': { min: 0.00, max: 0.07, name: '崭新出厂', full_name: '崭新出厂 (Factory New)' },
-    'mw': { min: 0.07, max: 0.15, name: '略有磨损', full_name: '略有磨损 (Minimal Wear)' },
-    'ft': { min: 0.15, max: 0.37, name: '久经沙场', full_name: '久经沙场 (Field-Tested)' },
-    'ww': { min: 0.37, max: 0.44, name: '破损不堪', full_name: '破损不堪 (Well-Worn)' },
-    'bs': { min: 0.44, max: 1.00, name: '战痕累累', full_name: '战痕累累 (Battle-Scarred)' }
-};
-
-// 磨损条颜色
+// 定义磨损等级颜色
 const WEAR_COLORS = [
     { value: 0.07, color: '#0073ff' },  // 崭新出厂
     { value: 0.15, color: '#4b69ff' },  // 略有磨损
@@ -57,18 +47,27 @@ const WEAR_COLORS = [
     { value: 1.00, color: '#eb4b4b' }   // 战痕累累
 ];
 
-// 根据磨损值获取对应的磨损度名称
-const getWearName = (wearValue) => {
-    if (wearValue >= 0 && wearValue <= 0.07) return 'fn';
-    if (wearValue > 0.07 && wearValue <= 0.15) return 'mw';
-    if (wearValue > 0.15 && wearValue <= 0.37) return 'ft';
-    if (wearValue > 0.37 && wearValue <= 0.44) return 'ww';
-    if (wearValue > 0.44 && wearValue <= 1.00) return 'bs';
-    return 'ft'; // 默认为久经沙场
-};
-
 // 磨损条组件
 const WearBar = ({ wear }) => {
+    // 如果磨损值为空或未定义，显示灰色磨损条
+    if (wear === null || wear === undefined) {
+        return (
+            <div className="wear-bar-container">
+                <Progress
+                    percent={0}
+                    showInfo={false}
+                    strokeColor="#cccccc"
+                    size="small"
+                    style={{ marginBottom: 4 }}
+                />
+                <div className="wear-text" style={{ fontSize: '12px', display: 'flex', justifyContent: 'space-between' }}>
+                    <span>未设置磨损</span>
+                    <span>-</span>
+                </div>
+            </div>
+        );
+    }
+
     // 确保磨损值在0-1之间
     const safeWear = Math.max(0, Math.min(1, wear));
 
@@ -92,6 +91,11 @@ const WearBar = ({ wear }) => {
     else if (safeWear <= 0.45) wearText = '破损不堪';
     else wearText = '战痕累累';
 
+    // 格式化磨损值，保留原始精度
+    const formattedWear = typeof safeWear === 'number' ?
+        safeWear.toString().replace(/(\.\d*?[1-9])0+$|\.0*$/, '$1') :
+        safeWear;
+
     return (
         <div className="wear-bar-container">
             <Progress
@@ -103,44 +107,31 @@ const WearBar = ({ wear }) => {
             />
             <div className="wear-text" style={{ fontSize: '12px', display: 'flex', justifyContent: 'space-between' }}>
                 <span>{wearText}</span>
-                <span>{safeWear.toFixed(18)}</span>
+                <span>{formattedWear}</span>
             </div>
         </div>
     );
 };
 
-// 根据稀有度获取对应的CSS类名
-const getRarityClass = (rarity) => {
-    switch (rarity?.name) {
-        case '隐秘':
-        case '隐秘级':
-            return 'rarity-covert';
-        case '保密':
-        case '保密级':
-            return 'rarity-classified';
-        case '受限':
-        case '受限级':
-            return 'rarity-restricted';
-        case '军规级':
-            return 'rarity-milspec';
-        case '工业级':
-            return 'rarity-industrial';
-        case '消费级':
-            return 'rarity-consumer';
-        default:
-            return '';
-    }
+const getWearName = (wearValue) => {
+    if (wearValue <= 0.07) return '崭新出厂';
+    if (wearValue <= 0.15) return '略有磨损';
+    if (wearValue <= 0.38) return '久经沙场';
+    if (wearValue <= 0.45) return '破损不堪';
+    return '战痕累累';
 };
 
-// 获取标准化的品质名称
+const getRarityClass = (rarity) => {
+    if (!rarity) return '';
+    const rarityName = typeof rarity === 'string' ? rarity : rarity.localized_name;
+    return rarityName ? rarityName.toLowerCase().replace(/\s+/g, '-') : '';
+};
+
 const getStandardRarityName = (rarityName) => {
-    if (rarityName === '受限级') return '受限';
-    if (rarityName === '保密级') return '保密';
-    if (rarityName === '隐秘级') return '隐秘';
+    if (!rarityName) return '未知';
     return rarityName;
 };
 
-// 根据武器类型获取对应的中文名称
 const getWeaponTypeName = (internalName) => {
     const typeMap = {
         'rifle': '步枪',
@@ -154,18 +145,9 @@ const getWeaponTypeName = (internalName) => {
     return typeMap[internalName] || internalName || '未知类型';
 };
 
-// 格式化价格
 const formatPrice = (price) => {
-    if (!price) return '暂无价格';
-
-    const numPrice = parseFloat(price);
-    if (isNaN(numPrice)) return '暂无价格';
-
-    if (numPrice >= 10000) {
-        return `¥${(numPrice / 10000).toFixed(2)}万`;
-    } else {
-        return `¥${numPrice.toFixed(2)}`;
-    }
+    if (!price) return '¥0.00';
+    return `¥${parseFloat(price).toFixed(2)}`;
 };
 
 // 在 TradeUpSimulator 组件中添加以下辅助函数
@@ -198,7 +180,7 @@ const TradeUpSimulator = ({ weaponCaseItems, mapCollectionItems, filterPanel, fi
             item.rarity &&
             item.rarity.localized_name &&
             RARITY_LEVELS[item.rarity.localized_name] &&
-            item.rarity.localized_name !== '传说级' // 传说级是最高级，不能用于汰换
+            RARITY_LEVELS[item.rarity.localized_name] < 6 // 隐秘级(6)及以上不能用于汰换
         );
 
         setAvailableItems(allItems);
@@ -246,19 +228,20 @@ const TradeUpSimulator = ({ weaponCaseItems, mapCollectionItems, filterPanel, fi
             }
         }
 
-        // 为新添加的物品设置默认磨损值 - 使用 IEEE754 标准
-        const defaultWear = 0.15;
-        // 创建一个 Float64Array 来确保使用 IEEE754 标准
-        const float64Array = new Float64Array(1);
-        float64Array[0] = defaultWear;
-        const ieee754Value = float64Array[0];
+        // 确保每个物品有唯一的ID
+        const itemWithUniqueId = {
+            ...item,
+            uniqueId: Date.now() + Math.random().toString(36).substring(2, 9)
+        };
 
-        setItemWearValues(prev => ({
-            ...prev,
-            [item.id]: ieee754Value
-        }));
+        // 初始不设置磨损值
+        setItemWearValues(prev => {
+            const newValues = { ...prev };
+            newValues[itemWithUniqueId.uniqueId] = null;
+            return newValues;
+        });
 
-        setSelectedItems([...selectedItems, item]);
+        setSelectedItems(prevItems => [...prevItems, itemWithUniqueId]);
     };
 
     // 移除已选择的物品
@@ -268,11 +251,13 @@ const TradeUpSimulator = ({ weaponCaseItems, mapCollectionItems, filterPanel, fi
         newItems.splice(index, 1);
 
         // 移除对应的磨损值
-        const newWearValues = { ...itemWearValues };
-        delete newWearValues[removedItem.id];
+        setItemWearValues(prev => {
+            const newValues = { ...prev };
+            delete newValues[removedItem.uniqueId || removedItem.id];
+            return newValues;
+        });
 
         setSelectedItems(newItems);
-        setItemWearValues(newWearValues);
         if (newItems.length === 0) {
             setResultItems([]); // 清除结果
         }
@@ -285,33 +270,39 @@ const TradeUpSimulator = ({ weaponCaseItems, mapCollectionItems, filterPanel, fi
         setResultItems([]);
     };
 
-    // 更新物品磨损值 - 使用 IEEE754 标准
+    // 更新物品磨损值 - 使用原始精度
     const updateItemWear = (itemId, value) => {
-        // 确保值是数字类型
-        let numValue = parseFloat(value);
-        if (isNaN(numValue)) {
-            numValue = 0.15; // 默认值
+        // 如果值为空，设置为 null
+        if (value === null || value === undefined || isNaN(value)) {
+            setItemWearValues(prev => {
+                const newValues = { ...prev };
+                newValues[itemId] = null;
+                return newValues;
+            });
+            return;
         }
 
         // 确保值在0-1之间
-        numValue = Math.max(0, Math.min(1, numValue));
+        const numValue = Math.max(0, Math.min(1, parseFloat(value)));
 
-        // 使用 IEEE754 标准
-        const float64Array = new Float64Array(1);
-        float64Array[0] = numValue;
-        const ieee754Value = float64Array[0];
-
-        setItemWearValues(prev => ({
-            ...prev,
-            [itemId]: ieee754Value
-        }));
+        // 直接使用原始输入值，避免精度问题
+        setItemWearValues(prev => {
+            const newValues = { ...prev };
+            newValues[itemId] = numValue;
+            return newValues;
+        });
     };
 
-    // 计算汰换结果的磨损值 - 使用 IEEE754 标准
+    // 计算汰换结果的磨损值 - 使用CS2汰换公式
     const calculateResultWear = () => {
+        // 根据CS2汰换公式：结果磨损值 = 输入皮肤平均磨损值 * (目标皮肤最大磨损值 - 目标皮肤最小磨损值) + 目标皮肤最小磨损值
+        // 在这里我们只计算平均磨损值部分
+
         // 计算所有选中物品的平均磨损值
         const wearValues = selectedItems.map(item => {
-            const value = itemWearValues[item.id];
+            const value = itemWearValues[item.uniqueId || item.id];
+            // 如果值为空，使用默认值0.15
+            if (value === null || value === undefined) return 0.15;
             // 确保值是数字类型
             const numValue = parseFloat(value);
             return isNaN(numValue) ? 0.15 : numValue;
@@ -321,10 +312,8 @@ const TradeUpSimulator = ({ weaponCaseItems, mapCollectionItems, filterPanel, fi
         const sum = wearValues.reduce((acc, val) => acc + val, 0);
         let avgWear = wearValues.length > 0 ? sum / wearValues.length : 0.15;
 
-        // 使用 IEEE754 标准
-        const float64Array = new Float64Array(1);
-        float64Array[0] = avgWear;
-        return float64Array[0];
+        // 直接返回计算结果，保留原始精度
+        return avgWear;
     };
 
     // 计算每个收藏品系列的上级皮肤数量
@@ -353,7 +342,7 @@ const TradeUpSimulator = ({ weaponCaseItems, mapCollectionItems, filterPanel, fi
             const currentRarityLevel = RARITY_LEVELS[selectedItems[0].rarity.localized_name];
 
             // 确保有更高品质可用
-            if (currentRarityLevel >= 6) { // 隐秘级是最高可汰换品质
+            if (currentRarityLevel >= 5) { // 保密级是最高可汰换品质，隐秘级不能汰换
                 setError('已经是最高可汰换品质，无法继续汰换');
                 setLoading(false);
                 return;
@@ -449,19 +438,187 @@ const TradeUpSimulator = ({ weaponCaseItems, mapCollectionItems, filterPanel, fi
                 </div>
             </Card>
 
-            <Row gutter={16}>
-                <Col span={12}>
+            {/* 修改为上下布局 */}
+            <Row>
+                <Col span={24}>
+                    <Card
+                        title={`已选物品 (${selectedItems.length}/10)`}
+                        variant="outlined"
+                        style={{ marginBottom: 16 }}
+                        extra={
+                            <Button type="primary" danger onClick={clearSelection} disabled={selectedItems.length === 0}>
+                                清空
+                            </Button>
+                        }
+                    >
+                        {selectedItems.length > 0 ? (
+                            <Row gutter={[16, 16]}>
+                                {selectedItems.map((item, index) => (
+                                    <Col
+                                        xs={24} sm={12} md={8} lg={6} xl={4}
+                                        key={`selected-${index}`}
+                                    >
+                                        <Card
+                                            className="weapon-card"
+                                            variant="outlined"
+                                            hoverable
+                                            cover={
+                                                <div className="weapon-image-container">
+                                                    <img
+                                                        className="weapon-image"
+                                                        alt={item.name}
+                                                        src={item.icon_url || item.image}
+                                                        style={{ maxHeight: 120, width: '100%', objectFit: 'contain' }}
+                                                    />
+                                                    <WearBar wear={itemWearValues[item.uniqueId || item.id]} />
+                                                </div>
+                                            }
+                                            onClick={() => removeItem(index)}
+                                        >
+                                            <div className="weapon-info">
+                                                <div className="weapon-name" title={item.name}>
+                                                    {item.name}
+                                                </div>
+                                                <div className="weapon-details">
+                                                    <Tag color={item.rarity && (RARITY_COLORS[item.rarity.localized_name] || item.rarity.color)}>{item.rarity ? item.rarity.localized_name : '未知'}</Tag>
+                                                    <Tag>{item.weapon_name || getTypeName(item.type) || '未知武器'}</Tag>
+                                                    {(item.exterior || item.tags?.exterior) && <Tag>{getExteriorName(item.exterior) || (item.tags?.exterior?.localized_name) || ''}</Tag>}
+                                                </div>
+                                                <div className="weapon-container">
+                                                    {item.container || (item.weaponcase && (typeof item.weaponcase === 'string' ? item.weaponcase : item.weaponcase.localized_name)) || '未知收藏品'}
+                                                </div>
+                                                <div style={{ marginTop: 8 }}>
+                                                    <InputNumber
+                                                        min={0}
+                                                        max={1}
+                                                        step={0.0001}
+                                                        style={{ width: '100%' }}
+                                                        value={itemWearValues[item.uniqueId || item.id]}
+                                                        onChange={(value) => {
+                                                            // 阻止事件冒泡，防止触发卡片的点击事件
+                                                            updateItemWear(item.uniqueId || item.id, value);
+                                                        }}
+                                                        onClick={(e) => {
+                                                            // 阻止事件冒泡，防止触发卡片的点击事件
+                                                            e.stopPropagation();
+                                                        }}
+                                                        onMouseDown={(e) => {
+                                                            // 阻止事件冒泡，防止触发卡片的点击事件
+                                                            e.stopPropagation();
+                                                        }}
+                                                        formatter={(value) => {
+                                                            if (value === null || value === undefined) return '';
+                                                            // 保留原始精度，去除末尾多余的0
+                                                            return value.toString().replace(/(\.\d*?[1-9])0+$|\.0*$/, '$1');
+                                                        }}
+                                                        parser={(value) => {
+                                                            const parsed = parseFloat(value);
+                                                            return isNaN(parsed) ? null : parsed;
+                                                        }}
+                                                        controls={false}
+                                                        placeholder="输入磨损值 (0-1)"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </Col>
+                                ))}
+                            </Row>
+                        ) : (
+                            <Empty description="请从下方选择物品" />
+                        )}
+
+                        <div style={{ marginTop: 16, textAlign: 'center' }}>
+                            <Button
+                                type="primary"
+                                onClick={performTradeUp}
+                                disabled={selectedItems.length !== 10}
+                                loading={loading}
+                            >
+                                执行汰换
+                            </Button>
+                        </div>
+                    </Card>
+                </Col>
+            </Row>
+
+            {/* 汰换结果放在已选物品下方 */}
+            <Row>
+                <Col span={24}>
+                    <Card
+                        title="汰换结果"
+                        variant="outlined"
+                        style={{ marginBottom: 16 }}
+                    >
+                        {loading ? (
+                            <div style={{ textAlign: 'center', padding: 20 }}>
+                                <Spin size="large" />
+                                <p>正在计算汰换结果...</p>
+                            </div>
+                        ) : error ? (
+                            <div style={{ color: 'red', padding: 10 }}>
+                                {error}
+                            </div>
+                        ) : resultItems.length > 0 ? (
+                            <Row gutter={[16, 16]}>
+                                {resultItems.map((result, index) => (
+                                    <Col
+                                        xs={24} sm={12} md={8} lg={6} xl={4}
+                                        key={`result-${index}`}
+                                    >
+                                        <Card
+                                            className="weapon-card"
+                                            variant="outlined"
+                                            cover={
+                                                <div className="weapon-image-container">
+                                                    <img
+                                                        className="weapon-image"
+                                                        alt={result.item.name}
+                                                        src={result.item.icon_url || result.item.image}
+                                                        style={{ maxHeight: 120, width: '100%', objectFit: 'contain' }}
+                                                    />
+                                                    <WearBar wear={result.wear} />
+                                                </div>
+                                            }
+                                        >
+                                            <div className="weapon-info">
+                                                <div className="weapon-name" title={result.item.name}>
+                                                    {result.item.name}
+                                                </div>
+                                                <div className="weapon-details">
+                                                    <Tag color={result.item.rarity && (RARITY_COLORS[result.item.rarity.localized_name] || result.item.rarity.color)}>{result.item.rarity ? result.item.rarity.localized_name : '未知'}</Tag>
+                                                    <Tag>{result.item.weapon_name || getTypeName(result.item.type) || '未知武器'}</Tag>
+                                                </div>
+                                                <div className="weapon-container">
+                                                    {result.item.container || (result.item.weaponcase && (typeof result.item.weaponcase === 'string' ? result.item.weaponcase : result.item.weaponcase.localized_name)) || '未知收藏品'}
+                                                </div>
+                                                <div className="weapon-probability">
+                                                    <Tag color="blue">概率: {(result.probability * 100).toFixed(2)}%</Tag>
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </Col>
+                                ))}
+                            </Row>
+                        ) : (
+                            <Empty description="请先执行汰换" />
+                        )}
+                    </Card>
+                </Col>
+            </Row>
+
+            <Row>
+                <Col span={24}>
                     <Card
                         title="可用物品"
                         variant="outlined"
-                        style={{ marginBottom: 16 }}
                     >
                         {filteredItems.length > 0 ? (
                             <>
                                 <Row gutter={[16, 16]}>
                                     {paginatedItems.map((item, index) => (
                                         <Col
-                                            xs={24} sm={12} md={8} lg={6}
+                                            xs={24} sm={12} md={8} lg={6} xl={4}
                                             key={`available-${index}`}
                                         >
                                             <Card
@@ -487,7 +644,6 @@ const TradeUpSimulator = ({ weaponCaseItems, mapCollectionItems, filterPanel, fi
                                                     <div className="weapon-details">
                                                         <Tag color={item.rarity && (RARITY_COLORS[item.rarity.localized_name] || item.rarity.color)}>{item.rarity ? item.rarity.localized_name : '未知'}</Tag>
                                                         <Tag>{item.weapon_name || getTypeName(item.type) || '未知武器'}</Tag>
-                                                        {(item.exterior || item.tags?.exterior) && <Tag>{getExteriorName(item.exterior) || (item.tags?.exterior?.localized_name) || ''}</Tag>}
                                                     </div>
                                                     <div className="weapon-container">
                                                         {item.container || (item.weaponcase && (typeof item.weaponcase === 'string' ? item.weaponcase : item.weaponcase.localized_name)) || '未知收藏品'}
@@ -510,147 +666,6 @@ const TradeUpSimulator = ({ weaponCaseItems, mapCollectionItems, filterPanel, fi
                             </>
                         ) : (
                             <Empty description="没有找到符合条件的物品" />
-                        )}
-                    </Card>
-                </Col>
-
-                <Col span={12}>
-                    <Card
-                        title={`已选物品 (${selectedItems.length}/10)`}
-                        variant="outlined"
-                        style={{ marginBottom: 16 }}
-                        extra={
-                            <Button type="primary" danger onClick={clearSelection} disabled={selectedItems.length === 0}>
-                                清空
-                            </Button>
-                        }
-                    >
-                        {selectedItems.length > 0 ? (
-                            <Row gutter={[16, 16]}>
-                                {selectedItems.map((item, index) => (
-                                    <Col
-                                        xs={24} sm={12} md={8} lg={6}
-                                        key={`selected-${index}`}
-                                    >
-                                        <Card
-                                            className="weapon-card"
-                                            variant="outlined"
-                                            hoverable
-                                            cover={
-                                                <div className="weapon-image-container">
-                                                    <img
-                                                        className="weapon-image"
-                                                        alt={item.name}
-                                                        src={item.icon_url || item.image}
-                                                        style={{ maxHeight: 120, width: '100%', objectFit: 'contain' }}
-                                                    />
-                                                    <WearBar wear={itemWearValues[item.id] || 0.15} />
-                                                </div>
-                                            }
-                                            onClick={() => removeItem(index)}
-                                        >
-                                            <div className="weapon-info">
-                                                <div className="weapon-name" title={item.name}>
-                                                    {item.name}
-                                                </div>
-                                                <div className="weapon-details">
-                                                    <Tag color={item.rarity && (RARITY_COLORS[item.rarity.localized_name] || item.rarity.color)}>{item.rarity ? item.rarity.localized_name : '未知'}</Tag>
-                                                    <Tag>{item.weapon_name || getTypeName(item.type) || '未知武器'}</Tag>
-                                                    {(item.exterior || item.tags?.exterior) && <Tag>{getExteriorName(item.exterior) || (item.tags?.exterior?.localized_name) || ''}</Tag>}
-                                                </div>
-                                                <div className="weapon-container">
-                                                    {item.container || (item.weaponcase && (typeof item.weaponcase === 'string' ? item.weaponcase : item.weaponcase.localized_name)) || '未知收藏品'}
-                                                </div>
-                                                <div style={{ marginTop: 8 }}>
-                                                    <InputNumber
-                                                        min={0}
-                                                        max={1}
-                                                        step={0.01}
-                                                        style={{ width: '100%' }}
-                                                        value={itemWearValues[item.id]}
-                                                        onChange={(value) => updateItemWear(item.id, value)}
-                                                        formatter={(value) => value ? parseFloat(value).toFixed(18) : '0.000000000000000000'}
-                                                        parser={(value) => parseFloat(value)}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </Card>
-                                    </Col>
-                                ))}
-                            </Row>
-                        ) : (
-                            <Empty description="请从左侧选择物品" />
-                        )}
-
-                        <div style={{ marginTop: 16, textAlign: 'center' }}>
-                            <Button
-                                type="primary"
-                                onClick={performTradeUp}
-                                disabled={selectedItems.length !== 10}
-                                loading={loading}
-                            >
-                                执行汰换
-                            </Button>
-                        </div>
-                    </Card>
-
-                    <Card
-                        title="汰换结果"
-                        variant="outlined"
-                    >
-                        {loading ? (
-                            <div style={{ textAlign: 'center', padding: 20 }}>
-                                <Spin size="large" />
-                                <p>正在计算汰换结果...</p>
-                            </div>
-                        ) : error ? (
-                            <div style={{ color: 'red', padding: 10 }}>
-                                {error}
-                            </div>
-                        ) : resultItems.length > 0 ? (
-                            <Row gutter={[16, 16]}>
-                                {resultItems.map((result, index) => (
-                                    <Col
-                                        xs={24} sm={12} md={8} lg={6}
-                                        key={`result-${index}`}
-                                    >
-                                        <Card
-                                            className="weapon-card"
-                                            variant="outlined"
-                                            cover={
-                                                <div className="weapon-image-container">
-                                                    <img
-                                                        className="weapon-image"
-                                                        alt={result.item.name}
-                                                        src={result.item.icon_url || result.item.image}
-                                                        style={{ maxHeight: 120, width: '100%', objectFit: 'contain' }}
-                                                    />
-                                                    <WearBar wear={result.wear} />
-                                                </div>
-                                            }
-                                        >
-                                            <div className="weapon-info">
-                                                <div className="weapon-name" title={result.item.name}>
-                                                    {result.item.name}
-                                                </div>
-                                                <div className="weapon-details">
-                                                    <Tag color={result.item.rarity && (RARITY_COLORS[result.item.rarity.localized_name] || result.item.rarity.color)}>{result.item.rarity ? result.item.rarity.localized_name : '未知'}</Tag>
-                                                    <Tag>{result.item.weapon_name || getTypeName(result.item.type) || '未知武器'}</Tag>
-                                                    {(result.item.exterior || result.item.tags?.exterior) && <Tag>{getExteriorName(result.item.exterior) || (result.item.tags?.exterior?.localized_name) || ''}</Tag>}
-                                                </div>
-                                                <div className="weapon-container">
-                                                    {result.item.container || (result.item.weaponcase && (typeof result.item.weaponcase === 'string' ? result.item.weaponcase : result.item.weaponcase.localized_name)) || '未知收藏品'}
-                                                </div>
-                                                <div className="weapon-probability">
-                                                    <Tag color="blue">概率: {(result.probability * 100).toFixed(2)}%</Tag>
-                                                </div>
-                                            </div>
-                                        </Card>
-                                    </Col>
-                                ))}
-                            </Row>
-                        ) : (
-                            <Empty description="请先执行汰换" />
                         )}
                     </Card>
                 </Col>
