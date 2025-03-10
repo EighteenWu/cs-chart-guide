@@ -3,7 +3,7 @@
 这是一个基于React的CS:GO汰换模拟器;每个物品的磨损区间不一致,需要拿到所有物品的所有磨损区间,然后进行计算;物品磨损实际汰换过程中只计算了前9位,后续的数值没有进行计算,buff的磨损后九位也是随机生成;
 
 ## 体验地址
-[cs-alchemize.dkon.cn](cs-alchemize.dkon.cn)
+https://cs-alchemize.dkon.cn/
 
 ## 功能特点
 
