@@ -1,0 +1,452 @@
+[
+    {
+        "code": "OK",
+        "data": {
+            "container": {
+                "goods_id": 1115500,
+                "icon_url": "https://market.fp.ps.netease.com/file/67eb233cc57966917d25b5328i2tO23K06",
+                "name": "\u70ed\u6f6e\u6b66\u5668\u7bb1",
+                "sell_min_price": "5.06"
+            },
+            "has_unusual": true,
+            "items": [
+                {
+                    "goods": {
+                        "appid": 730,
+                        "description": null,
+                        "game": "csgo",
+                        "goods_id": 1116136,
+                        "icon_url": "https://market.fp.ps.netease.com/file/67eb3474a9b60367434e1ccbfHwbskMw06",
+                        "is_charm": false,
+                        "item_id": null,
+                        "keychain_color_img": null,
+                        "market_hash_name": "AWP | Printstream (Factory New)",
+                        "market_min_price": "0",
+                        "name": "AWP | \u5370\u82b1\u96c6 (\u5d2d\u65b0\u51fa\u5382)",
+                        "original_icon_url": "https://market.fp.ps.netease.com/file/67eb3473dea1dc76bc13bee9JeFIX3NO06",
+                        "sell_min_price": "3296",
+                        "sell_reference_price": "0",
+                        "short_name": "AWP | \u5370\u82b1\u96c6",
+                        "steam_price": "511.44",
+                        "steam_price_cny": "3731.36",
+                        "tags": {
+                            "category": {
+                                "category": "category",
+                                "id": 625,
+                                "internal_name": "weapon_awp",
+                                "localized_name": "AWP"
+                            },
+                            "category_group": {
+                                "category": "category_group",
+                                "id": 622,
+                                "internal_name": "rifle",
+                                "localized_name": "\u6b65\u67aa"
+                            },
+                            "custom": {
+                                "category": "custom",
+                                "id": 11595,
+                                "internal_name": "white",
+                                "localized_name": "white"
+                            },
+                            "exterior": {
+                                "category": "exterior",
+                                "id": 510,
+                                "internal_name": "wearcategory0",
+                                "localized_name": "\u5d2d\u65b0\u51fa\u5382"
+                            },
+                            "itemset": {
+                                "category": "itemset",
+                                "id": 129672,
+                                "internal_name": "set_community_35",
+                                "localized_name": "set_community_35"
+                            },
+                            "quality": {
+                                "category": "quality",
+                                "id": 516,
+                                "internal_name": "normal",
+                                "localized_name": "\u666e\u901a"
+                            },
+                            "rarity": {
+                                "category": "rarity",
+                                "id": 588,
+                                "internal_name": "ancient_weapon",
+                                "localized_name": "\u9690\u79d8"
+                            },
+                            "series": {
+                                "category": "series",
+                                "id": 17342,
+                                "internal_name": "printstream",
+                                "localized_name": "printstream"
+                            },
+                            "type": {
+                                "category": "type",
+                                "id": 571,
+                                "internal_name": "csgo_type_sniperrifle",
+                                "localized_name": "\u72d9\u51fb\u6b65\u67aa"
+                            },
+                            "weapon": {
+                                "category": "weapon",
+                                "id": 523,
+                                "internal_name": "weapon_awp",
+                                "localized_name": "AWP"
+                            },
+                            "weaponcase": {
+                                "category": "weaponcase",
+                                "id": 129676,
+                                "internal_name": "Fever Case",
+                                "localized_name": "fever case"
+                            }
+                        }
+                    },
+                    "goods_id": 1116136,
+                    "localized_name": "AWP | \u5370\u82b1\u96c6",
+                    "max_price": "3296",
+                    "min_price": "500"
+                },
+                {
+                    "goods": {
+                        "appid": 730,
+                        "description": null,
+                        "game": "csgo",
+                        "goods_id": 1116022,
+                        "icon_url": "https://market.fp.ps.netease.com/file/67eb2f0625d69181ecad352eBogINRiE06",
+                        "is_charm": false,
+                        "item_id": null,
+                        "keychain_color_img": null,
+                        "market_hash_name": "FAMAS | Bad Trip (Factory New)",
+                        "market_min_price": "0",
+                        "name": "\u6cd5\u739b\u65af | Bad Trip (\u5d2d\u65b0\u51fa\u5382)",
+                        "original_icon_url": "https://market.fp.ps.netease.com/file/67eb2f040bdac510559c3ca0vk9x8xIJ06",
+                        "sell_min_price": "130",
+                        "sell_reference_price": "0",
+                        "short_name": "\u6cd5\u739b\u65af | Bad Trip",
+                        "steam_price": "28.84",
+                        "steam_price_cny": "210.41",
+                        "tags": {
+                            "category": {
+                                "category": "category",
+                                "id": 627,
+                                "internal_name": "weapon_famas",
+                                "localized_name": "\u6cd5\u739b\u65af"
+                            },
+                            "category_group": {
+                                "category": "category_group",
+                                "id": 622,
+                                "internal_name": "rifle",
+                                "localized_name": "\u6b65\u67aa"
+                            },
+                            "custom": {
+                                "category": "custom",
+                                "id": 8787,
+                                "internal_name": "beast",
+                                "localized_name": "beast"
+                            },
+                            "exterior": {
+                                "category": "exterior",
+                                "id": 510,
+                                "internal_name": "wearcategory0",
+                                "localized_name": "\u5d2d\u65b0\u51fa\u5382"
+                            },
+                            "itemset": {
+                                "category": "itemset",
+                                "id": 129672,
+                                "internal_name": "set_community_35",
+                                "localized_name": "set_community_35"
+                            },
+                            "quality": {
+                                "category": "quality",
+                                "id": 516,
+                                "internal_name": "normal",
+                                "localized_name": "\u666e\u901a"
+                            },
+                            "rarity": {
+                                "category": "rarity",
+                                "id": 588,
+                                "internal_name": "ancient_weapon",
+                                "localized_name": "\u9690\u79d8"
+                            },
+                            "type": {
+                                "category": "type",
+                                "id": 570,
+                                "internal_name": "csgo_type_rifle",
+                                "localized_name": "\u6b65\u67aa"
+                            },
+                            "weapon": {
+                                "category": "weapon",
+                                "id": 527,
+                                "internal_name": "weapon_famas",
+                                "localized_name": "\u6cd5\u739b\u65af"
+                            },
+                            "weaponcase": {
+                                "category": "weaponcase",
+                                "id": 129676,
+                                "internal_name": "Fever Case",
+                                "localized_name": "fever case"
+                            }
+                        }
+                    },
+                    "goods_id": 1116022,
+                    "localized_name": "\u6cd5\u739b\u65af | Bad Trip",
+                    "max_price": "133.49",
+                    "min_price": "19.09"
+                },
+                {
+                    "goods": {
+                        "appid": 730,
+                        "description": null,
+                        "game": "csgo",
+                        "goods_id": 1115941,
+                        "icon_url": "https://market.fp.ps.netease.com/file/67eb2a9886adad7234213cf6lF1VONwE06",
+                        "is_charm": false,
+                        "item_id": null,
+                        "keychain_color_img": null,
+                        "market_hash_name": "AK-47 | Searing Rage (Factory New)",
+                        "market_min_price": "0",
+                        "name": "AK-47 | Searing Rage (\u5d2d\u65b0\u51fa\u5382)",
+                        "original_icon_url": "https://market.fp.ps.netease.com/file/67eb2a97cae50855bd891401ygpkSeh606",
+                        "sell_min_price": "262.5",
+                        "sell_reference_price": "0",
+                        "short_name": "AK-47 | Searing Rage",
+                        "steam_price": "41.86",
+                        "steam_price_cny": "305.4",
+                        "tags": {
+                            "category": {
+                                "category": "category",
+                                "id": 626,
+                                "internal_name": "weapon_ak47",
+                                "localized_name": "AK-47"
+                            },
+                            "category_group": {
+                                "category": "category_group",
+                                "id": 622,
+                                "internal_name": "rifle",
+                                "localized_name": "\u6b65\u67aa"
+                            },
+                            "custom": {
+                                "category": "custom",
+                                "id": 8786,
+                                "internal_name": "yellow",
+                                "localized_name": "yellow"
+                            },
+                            "exterior": {
+                                "category": "exterior",
+                                "id": 510,
+                                "internal_name": "wearcategory0",
+                                "localized_name": "\u5d2d\u65b0\u51fa\u5382"
+                            },
+                            "itemset": {
+                                "category": "itemset",
+                                "id": 129672,
+                                "internal_name": "set_community_35",
+                                "localized_name": "set_community_35"
+                            },
+                            "quality": {
+                                "category": "quality",
+                                "id": 516,
+                                "internal_name": "normal",
+                                "localized_name": "\u666e\u901a"
+                            },
+                            "rarity": {
+                                "category": "rarity",
+                                "id": 591,
+                                "internal_name": "legendary_weapon",
+                                "localized_name": "\u4fdd\u5bc6"
+                            },
+                            "type": {
+                                "category": "type",
+                                "id": 570,
+                                "internal_name": "csgo_type_rifle",
+                                "localized_name": "\u6b65\u67aa"
+                            },
+                            "weapon": {
+                                "category": "weapon",
+                                "id": 521,
+                                "internal_name": "weapon_ak47",
+                                "localized_name": "AK-47"
+                            },
+                            "weaponcase": {
+                                "category": "weaponcase",
+                                "id": 129676,
+                                "internal_name": "Fever Case",
+                                "localized_name": "fever case"
+                            }
+                        }
+                    },
+                    "goods_id": 1115941,
+                    "localized_name": "AK-47 | Searing Rage",
+                    "max_price": "262.5",
+                    "min_price": "34"
+                },
+                {
+                    "goods": {
+                        "appid": 730,
+                        "description": null,
+                        "game": "csgo",
+                        "goods_id": 1115784,
+                        "icon_url": "https://market.fp.ps.netease.com/file/67eb2b558e3c126126ec7558I5JsVkvP06",
+                        "is_charm": false,
+                        "item_id": null,
+                        "keychain_color_img": null,
+                        "market_hash_name": "UMP-45 | K.O. Factory (Factory New)",
+                        "market_min_price": "0",
+                        "name": "UMP-45 | K.O. Factory (\u5d2d\u65b0\u51fa\u5382)",
+                        "original_icon_url": "https://market.fp.ps.netease.com/file/67eb2b54868a3eb07d71a47f8gDKicL206",
+                        "sell_min_price": "170",
+                        "sell_reference_price": "0",
+                        "short_name": "UMP-45 | K.O. Factory",
+                        "steam_price": "25.46",
+                        "steam_price_cny": "185.75",
+                        "tags": {
+                            "category": {
+                                "category": "category",
+                                "id": 637,
+                                "internal_name": "weapon_ump45",
+                                "localized_name": "UMP-45"
+                            },
+                            "category_group": {
+                                "category": "category_group",
+                                "id": 634,
+                                "internal_name": "smg",
+                                "localized_name": "\u5fae\u578b\u51b2\u950b\u67aa"
+                            },
+                            "exterior": {
+                                "category": "exterior",
+                                "id": 510,
+                                "internal_name": "wearcategory0",
+                                "localized_name": "\u5d2d\u65b0\u51fa\u5382"
+                            },
+                            "itemset": {
+                                "category": "itemset",
+                                "id": 129672,
+                                "internal_name": "set_community_35",
+                                "localized_name": "set_community_35"
+                            },
+                            "quality": {
+                                "category": "quality",
+                                "id": 516,
+                                "internal_name": "normal",
+                                "localized_name": "\u666e\u901a"
+                            },
+                            "rarity": {
+                                "category": "rarity",
+                                "id": 591,
+                                "internal_name": "legendary_weapon",
+                                "localized_name": "\u4fdd\u5bc6"
+                            },
+                            "type": {
+                                "category": "type",
+                                "id": 578,
+                                "internal_name": "csgo_type_smg",
+                                "localized_name": "\u5fae\u578b\u51b2\u950b\u67aa"
+                            },
+                            "weapon": {
+                                "category": "weapon",
+                                "id": 551,
+                                "internal_name": "weapon_ump45",
+                                "localized_name": "UMP-45"
+                            },
+                            "weaponcase": {
+                                "category": "weaponcase",
+                                "id": 129676,
+                                "internal_name": "Fever Case",
+                                "localized_name": "fever case"
+                            }
+                        }
+                    },
+                    "goods_id": 1115784,
+                    "localized_name": "UMP-45 | K.O. Factory",
+                    "max_price": "170",
+                    "min_price": "31.9"
+                },
+                {
+                    "goods": {
+                        "appid": 730,
+                        "description": null,
+                        "game": "csgo",
+                        "goods_id": 1115935,
+                        "icon_url": "https://market.fp.ps.netease.com/file/67eb27cdc5cc18fbe74c88afNglNazti06",
+                        "is_charm": false,
+                        "item_id": null,
+                        "keychain_color_img": null,
+                        "market_hash_name": "Glock-18 | Shinobu (Factory New)",
+                        "market_min_price": "0",
+                        "name": "\u683c\u6d1b\u514b 18 \u578b | Shinobu (\u5d2d\u65b0\u51fa\u5382)",
+                        "original_icon_url": "https://market.fp.ps.netease.com/file/67eb27ca146708a00983051dA64T2ylR06",
+                        "sell_min_price": "246",
+                        "sell_reference_price": "0",
+                        "short_name": "\u683c\u6d1b\u514b 18 \u578b | Shinobu",
+                        "steam_price": "38.09",
+                        "steam_price_cny": "277.9",
+                        "tags": {
+                            "category": {
+                                "category": "category",
+                                "id": 614,
+                                "internal_name": "weapon_glock",
+                                "localized_name": "\u683c\u6d1b\u514b 18 \u578b"
+                            },
+                            "category_group": {
+                                "category": "category_group",
+                                "id": 611,
+                                "internal_name": "pistol",
+                                "localized_name": "\u624b\u67aa"
+                            },
+                            "custom": {
+                                "category": "custom",
+                                "id": 11596,
+                                "internal_name": "purple",
+                                "localized_name": "purple"
+                            },
+                            "exterior": {
+                                "category": "exterior",
+                                "id": 510,
+                                "internal_name": "wearcategory0",
+                                "localized_name": "\u5d2d\u65b0\u51fa\u5382"
+                            },
+                            "itemset": {
+                                "category": "itemset",
+                                "id": 129672,
+                                "internal_name": "set_community_35",
+                                "localized_name": "set_community_35"
+                            },
+                            "quality": {
+                                "category": "quality",
+                                "id": 516,
+                                "internal_name": "normal",
+                                "localized_name": "\u666e\u901a"
+                            },
+                            "rarity": {
+                                "category": "rarity",
+                                "id": 591,
+                                "internal_name": "legendary_weapon",
+                                "localized_name": "\u4fdd\u5bc6"
+                            },
+                            "type": {
+                                "category": "type",
+                                "id": 576,
+                                "internal_name": "csgo_type_pistol",
+                                "localized_name": "\u624b\u67aa"
+                            },
+                            "weapon": {
+                                "category": "weapon",
+                                "id": 531,
+                                "internal_name": "weapon_glock",
+                                "localized_name": "\u683c\u6d1b\u514b 18 \u578b"
+                            },
+                            "weaponcase": {
+                                "category": "weaponcase",
+                                "id": 129676,
+                                "internal_name": "Fever Case",
+                                "localized_name": "fever case"
+                            }
+                        }
+                    },
+                    "goods_id": 1115935,
+                    "localized_name": "\u683c\u6d1b\u514b 18 \u578b | Shinobu",
+                    "max_price": "245",
+                    "min_price": "41.88"
+                }
+            ]
+        },
+        "msg": null
+    }
+]

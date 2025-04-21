@@ -100,6 +100,11 @@ const getTypeName = (type) => {
 };
 
 const WeaponList = ({ items }) => {
+    // 点击卡片时打印完整item信息
+    const handleCardClick = (item) => {
+        console.log('当前物品完整信息:', JSON.parse(JSON.stringify(item)));
+    };
+
     if (!items || items.length === 0) {
         return (
             <Empty
@@ -116,6 +121,7 @@ const WeaponList = ({ items }) => {
                     key={index}
                     className="weapon-card"
                     hoverable
+                    onClick={() => handleCardClick(item)}
                     cover={
                         <img
                             alt={item.name}
@@ -132,28 +138,40 @@ const WeaponList = ({ items }) => {
                         </Tooltip>
 
                         <div className="weapon-details">
-                            <Tooltip title={item.rarity.localized_name}>
-                                <Tag
-                                    className="weapon-rarity"
-                                    color={RARITY_COLORS[item.rarity.localized_name] || item.rarity.color}
-                                >
-                                    {getStandardRarityName(item.rarity.localized_name)}
-                                </Tag>
-                            </Tooltip>
-                            <Tag className="weapon-type">
-                                {item.weapon_name || getTypeName(item.type) || '未知武器'}
-                            </Tag>
+                            {item.rarity && (
+                                <Tooltip title={item.rarity.localized_name}>
+                                    <Tag
+                                        className={getRarityClass(item.rarity)}
+                                        color={RARITY_COLORS[item.rarity.localized_name] || item.rarity.color}
+                                    >
+                                        {getStandardRarityName(item.rarity.localized_name)}
+                                    </Tag>
+                                </Tooltip>
+                            )}
+                            {item.weapon_type && (
+                                <Tooltip title={item.container}>
+                                    <Tag className="weapon-type">{item.container}</Tag>
+                                </Tooltip>
+                            )}
+                            {item.exterior && (
+                                <Tag className="weapon-exterior">{item.exterior.localized_name}</Tag>
+                            )}
                         </div>
-
-                        <div className="weapon-container">
-                            {item.container || (item.weaponcase && (typeof item.weaponcase === 'string' ? item.weaponcase : item.weaponcase.localized_name)) || '未知收藏品'}
-                        </div>
+                        
+                    
+                        {/* 添加磨损区间 */}
+                        {item.min_float !== undefined && item.max_float !== undefined && (
+                            <div className="float-range">
+                                <span>磨损区间: </span>
+                                <span>{item.min_float?.toFixed(2) || '0.00'} - {item.max_float?.toFixed(2) || '0.00'}</span>
+                            </div>
+                        )}
 
                         <div className="weapon-price">
-                            {item.price ? (
+                            {item.min_price !== undefined && item.max_price !== undefined ? (
                                 <div className="price-tag">
                                     <span className="price-label">售价:</span>
-                                    <span className="price-value">{formatPrice(item.price.sell_min)}</span>
+                                    <span>{formatPrice(item.min_price)} - {formatPrice(item.max_price)}</span>
                                 </div>
                             ) : (
                                 <div className="price-tag">暂无价格</div>
@@ -166,4 +184,4 @@ const WeaponList = ({ items }) => {
     );
 };
 
-export default WeaponList; 
+export default WeaponList;

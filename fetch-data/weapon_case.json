@@ -4,10 +4,18 @@
         "items": [
             {
                 "container_type": "weaponcase",
+                "description": "Fever Case",
+                "icon_url": "https://market.fp.ps.netease.com/file/67eb233cc57966917d25b5328i2tO23K06",
+                "name": "热潮武器箱",
+                "new": true,
+                "value": "Fever Case"
+            },
+            {
+                "container_type": "weaponcase",
                 "description": "Gallery Case",
                 "icon_url": "https://market.fp.ps.netease.com/file/66fde4d15e36956d6530882bVRKHVCzf05",
                 "name": "画廊武器箱",
-                "new": true,
+                "new": false,
                 "value": "Gallery Case"
             },
             {
@@ -333,7 +341,7 @@
         ],
         "page_num": 1,
         "page_size": 60,
-        "total_count": 41,
+        "total_count": 42,
         "total_page": 1
     },
     "msg": null

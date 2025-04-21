@@ -7,14 +7,14 @@ export const extractWeaponCaseItems = (weaponCaseDetails) => {
     const result = [];
 
     // 检查数据格式
-    if (!weaponCaseDetails || !Array.isArray(weaponCaseDetails)) {
+    if (!weaponCaseDetails || typeof weaponCaseDetails !== 'object') {
         console.error('武器箱详情数据为空或格式不正确');
         return result;
     }
 
     try {
-        // 遍历武器箱数据
-        weaponCaseDetails.forEach(caseData => {
+        // 遍历所有键值对，提取items
+        Object.values(weaponCaseDetails).forEach(caseData => {
             if (caseData.code === "OK" && caseData.data && Array.isArray(caseData.data.items)) {
                 const containerName = caseData.data.container ? caseData.data.container.name : '未知';
 
@@ -37,6 +37,10 @@ export const extractWeaponCaseItems = (weaponCaseDetails) => {
                             quality: goods.tags.quality || null,
                             weaponcase: goods.tags.weaponcase || null,
                             exterior: goods.tags.exterior || null,
+                            min_price: item.min_price || null,
+                            max_price: item.max_price || null,
+                            min_float: item.min_float || null,
+                            max_float: item.max_float || null,
                             is_souvenir: goods.tags.quality && goods.tags.quality.internal_name === 'tournament'
                         });
                     }
@@ -60,14 +64,14 @@ export const extractMapCollectionItems = (mapCollectionDetails) => {
     const result = [];
 
     // 检查数据格式
-    if (!mapCollectionDetails || !Array.isArray(mapCollectionDetails)) {
+    if (!mapCollectionDetails || typeof mapCollectionDetails !== 'object') {
         console.error('地图收藏品详情数据为空或格式不正确');
         return result;
     }
 
     try {
-        // 遍历地图收藏品数据
-        mapCollectionDetails.forEach(collectionData => {
+        // 遍历所有键值对，提取items
+        Object.values(mapCollectionDetails).forEach(collectionData => {
             if (collectionData.code === "OK" && collectionData.data && Array.isArray(collectionData.data.items)) {
                 const containerName = collectionData.data.container ? collectionData.data.container.name : '未知';
 
@@ -90,6 +94,10 @@ export const extractMapCollectionItems = (mapCollectionDetails) => {
                             quality: goods.tags.quality || null,
                             weaponcase: goods.tags.itemset || null, // 对于地图收藏品，使用itemset作为weaponcase
                             exterior: goods.tags.exterior || null,
+                            min_price: item.min_price || null,
+                            max_price: item.max_price || null,
+                            min_float: item.min_float || null,
+                            max_float: item.max_float || null,
                             is_souvenir: goods.tags.quality && goods.tags.quality.internal_name === 'tournament'
                         });
                     }
@@ -205,4 +213,4 @@ export const isHighestRarityInCollection = (item, allItems) => {
     });
 
     return !hasHigherRarity;
-}; 
+};

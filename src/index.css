@@ -608,3 +608,15 @@ code {
         --error-color: #a61d24;
     }
 }
+
+.price-range,
+.float-range {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.dark-theme .price-range,
+.dark-theme .float-range {
+    color: #aaa;
+}

@@ -4,10 +4,42 @@
         "items": [
             {
                 "container_type": "itemset",
+                "description": "The Ascent Collection",
+                "icon_url": "https://market.fp.ps.netease.com/file/67eb528b24354d09048f80e2eP04Q0di06",
+                "name": "攀升收藏品",
+                "new": true,
+                "value": "set_timed_drops_cool"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Radiant Collection",
+                "icon_url": "https://market.fp.ps.netease.com/file/67eb52d01f250dc6001ad208JVTMeBA106",
+                "name": "热辐射收藏品",
+                "new": true,
+                "value": "set_timed_drops_warm"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Boreal Collection",
+                "icon_url": "https://market.fp.ps.netease.com/file/67eb52e082b4c6f4d5779ee4ibcJhkKt06",
+                "name": "寒带收藏品",
+                "new": true,
+                "value": "set_timed_drops_neutral"
+            },
+            {
+                "container_type": "itemset",
+                "description": "The Train 2025 Collection",
+                "icon_url": "https://market.fp.ps.netease.com/file/67eb52f9cf79bf604ce4c2dbi2K8F1aa06",
+                "name": "2025 列车停放站收藏品",
+                "new": true,
+                "value": "set_train_2025"
+            },
+            {
+                "container_type": "itemset",
                 "description": "The Sport & Field Collection",
                 "icon_url": "https://market.fp.ps.netease.com/file/66fe33133ace19c8235e77257ZkOfKFr05",
                 "name": "狩猎运动收藏品",
-                "new": true,
+                "new": false,
                 "value": "set_realism_camo"
             },
             {
@@ -15,7 +47,7 @@
                 "description": "The Graphic Design Collection",
                 "icon_url": "https://market.fp.ps.netease.com/file/66fe35ad14fa0b75b292759eEJ49I29S05",
                 "name": "平面设计收藏品",
-                "new": true,
+                "new": false,
                 "value": "set_graphic_design"
             },
             {
@@ -23,7 +55,7 @@
                 "description": "The Overpass 2024 Collection",
                 "icon_url": "https://market.fp.ps.netease.com/file/66fe33f832ccd1f496eff885wW3rmvK405",
                 "name": "死亡游乐园2024收藏品",
-                "new": true,
+                "new": false,
                 "value": "set_overpass_2024"
             },
             {
@@ -317,7 +349,7 @@
         ],
         "page_num": 1,
         "page_size": 60,
-        "total_count": 39,
+        "total_count": 43,
         "total_page": 1
     },
     "msg": null

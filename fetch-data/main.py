@@ -1,6 +1,7 @@
 import requests
 import json
 from tqdm import tqdm
+from concurrent.futures import ThreadPoolExecutor
 
 # 请求头
 HEADERS = {
@@ -62,8 +63,45 @@ def fetch_details(values, container_type):
         detail_response = requests.get(detail_url, headers=HEADERS)
         if detail_response.status_code == 200:
             details.append(detail_response.json())
-    return details
+    details = {i :item for i ,item in enumerate(details)}
+    return dict(details)
 
+
+def fetch_github_wear_data():
+    """从GitHub获取CSGO皮肤磨损数据"""
+    url = "https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/zh-CN/skins.json"
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    raise Exception(f"GitHub请求失败，状态码: {response.status_code}")
+
+def match_wear_data(buff_data, github_data):
+    """匹配buff163和GitHub的数据（多线程优化版）"""
+    def process_good(good, github_data):
+        """处理单个good的匹配逻辑"""
+        short_name = good['localized_name']
+        for skin in github_data:
+            if skin.get('name') == short_name:
+                # 创建新的字典避免直接修改原始数据
+                return {
+                    **good,
+                    'max_float': skin['max_float'],
+                    'min_float': skin['min_float']
+                }
+        return good
+
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        for item in buff_data.values():
+            if 'data' in item and item['data'] and 'items' in item['data']:
+                # 提交所有任务到线程池
+                futures = [
+                    executor.submit(process_good, good, github_data)
+                    for good in item['data']['items']
+                ]
+                # 更新items列表
+                item['data']['items'] = [future.result() for future in futures]
+    
+    return buff_data
 
 def main():
     try:
@@ -95,6 +133,22 @@ def main():
         print("Saving map collection details...")
         save_to_file('map_collection_details.json', map_collection_details)
 
+        # 获取并匹配磨损数据
+        print("Fetching wear data from GitHub...")
+        wear_data = fetch_github_wear_data()
+        
+        
+        print("Matching wear data with weapon cases...")
+        weapon_case_details = match_wear_data(weapon_case_details, wear_data)
+        
+        print("Matching wear data with map collections...")
+        
+        map_collection_details = match_wear_data(map_collection_details, wear_data)
+        
+        # 重新保存更新后的数据
+        save_to_file('weapon_case_details.json', weapon_case_details)
+        save_to_file('map_collection_details.json', map_collection_details)
+        
         print("武器箱列表数据已成功保存到weapon_case.json文件中。")
         print("地图收藏品列表数据已成功保存到map_collection.json文件中。")
         print("武器箱明细数据已成功保存到weapon_case_details.json文件中。")

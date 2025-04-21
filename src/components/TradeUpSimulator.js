@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Row, Col, message, Tag, Empty, Pagination, InputNumber, Spin, Divider, Progress } from 'antd';
-import { isHighestRarityInCollection } from '../utils/dataUtils';
+
 
 // 定义品质等级
 const RARITY_LEVELS = {
